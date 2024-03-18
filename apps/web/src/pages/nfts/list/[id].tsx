@@ -3,7 +3,21 @@
 
 'use client'
 
-import { AceIcon, AutoRow, Box, Button, Card, Column, Container, Flex, Loading, Row, Text } from '@pancakeswap/uikit'
+import {
+  AceIcon,
+  ArrowBackIcon,
+  AutoRow,
+  Box,
+  Button,
+  Card,
+  Column,
+  Container,
+  Flex,
+  IconButton,
+  Loading,
+  Row,
+  Text,
+} from '@pancakeswap/uikit'
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 import { DEFAULT_COLLECTION_AVATAR, DEFAULT_NFT_IMAGE, DOCKMAN_HOST } from 'config/nfts'
 import Link from 'next/link'
@@ -13,6 +27,7 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import { styled } from 'styled-components'
 import { ellipseAddress } from 'utils/address'
 import { displayBalance } from 'utils/display'
+import AddressLink from '../../../components/nfts/component/link'
 
 const NFTImage = styled.img`
   border: 1px solid #fff;
@@ -52,7 +67,6 @@ const SortButtonWrapper = styled.div`
     border-color: rgba(255, 255, 255, 0.95);
   }
 `
-
 const ItemLink = styled(Link)`
   display: flex;
   align-items: center;
@@ -64,7 +78,6 @@ const ItemLink = styled(Link)`
     background: #212121;
   }
 `
-
 const ItemsWrapper = styled.div`
   width: 100%;
   overflow-x: scroll;
@@ -166,9 +179,10 @@ export default function SGTList() {
 
   const [columns, setColumns] = useState(_columns)
   const raritySort = columns?.[1]?.sortType === 'asc' ? 'rarity_increase' : 'rarity_decrease'
+  const priceSort = columns?.[2]?.sortType === 'asc' ? 'price_increase' : 'price_decrease'
 
   const { data, fetchNextPage } = useInfiniteQuery({
-    queryKey: [`nfts_${id}_${raritySort}`],
+    queryKey: [`nfts_${id}_${raritySort}_${priceSort}`],
     queryFn: async ({ pageParam = 0 }) => {
       const res = await fetch(
         `${DOCKMAN_HOST}/nft?page_number=${pageParam + 1}&page_size=20&collection_id=${id}&sort_type=${raritySort}`,
@@ -217,6 +231,11 @@ export default function SGTList() {
       <Container>
         <Box pt="20px" pb="40px">
           <div className="nft-list__wrapper">
+            <Link href="/nfts" style={{ position: 'absolute', top: 20, left: 50 }}>
+              <IconButton as="a" scale="sm">
+                <ArrowBackIcon width="32px" />
+              </IconButton>
+            </Link>
             <Card p="20px" mb="20px">
               <Row alignItems="center">
                 <Flex mr="30px">
@@ -290,19 +309,19 @@ export default function SGTList() {
                     return (
                       <div key={item.name} style={item.style} className="sensei__table-header-item">
                         {item.name}
-                        {index > 0 && index < 2 && (
+                        {index > 0 && index < 3 && (
                           <SortButton
                             type={item.sortType as 'asc' | 'desc' | 'none'}
                             onClick={() => {
                               const newColumns = columns.map((column, i) => {
                                 if (i === index) {
                                   if (column.sortType === 'asc') {
-                                    return { ...column, sortType: 'desc' }
+                                    return { ...column, sortType: 'desc', selected: true }
                                   }
                                   if (column.sortType === 'desc') {
-                                    return { ...column, sortType: 'none' }
+                                    return { ...column, sortType: 'none', selected: false }
                                   }
-                                  return { ...column, sortType: 'asc' }
+                                  return { ...column, sortType: 'asc', selected: true }
                                 }
                                 return { ...column }
                               })
@@ -388,7 +407,15 @@ export default function SGTList() {
                           )}
                         </Flex>
                         <Flex justifyContent="center" width="180px" flexShrink={0}>
-                          {ellipseAddress(nft.owner, 5)}
+                          <AddressLink
+                            href={`https://explorer-endurance.fusionist.io/address/${nft.owner}`}
+                            onClick={(e) => {
+                              e.stopPropagation()
+                            }}
+                            target="_blank"
+                          >
+                            {ellipseAddress(nft.owner, 5)}
+                          </AddressLink>
                         </Flex>
                         <Row justifyContent="flex-end">
                           <Button scale="sm" onClick={() => router.push(`/nfts/detail/${nft?.id}`)}>

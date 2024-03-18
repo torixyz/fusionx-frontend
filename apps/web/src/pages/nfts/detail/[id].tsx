@@ -1,12 +1,13 @@
 'use client'
 
 import { ChainId } from '@pancakeswap/chains'
-import { AutoRow, Box, Column, Container, Flex, Loading, Text } from '@pancakeswap/uikit'
+import { ArrowBackIcon, AutoRow, Box, Column, Container, Flex, IconButton, Loading, Text } from '@pancakeswap/uikit'
 import { useQuery } from '@tanstack/react-query'
 import List from 'components/nfts/component/list'
 import { DEFAULT_NFT_IMAGE, DOCKMAN_HOST } from 'config/nfts'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { styled } from 'styled-components'
 import { getBlockExploreLink } from 'utils'
@@ -14,7 +15,7 @@ import { ellipseAddress } from 'utils/address'
 import Tag from '../../../components/Tag/tag'
 import Activity from '../../../components/nfts/component/activity'
 import Adventure from '../../../components/nfts/component/adventure'
-import Link from '../../../components/nfts/component/link'
+import AddressLink from '../../../components/nfts/component/link'
 import Offer from '../../../components/nfts/component/offer'
 
 dayjs.extend(relativeTime)
@@ -316,6 +317,14 @@ export default function SGTDetail() {
     <Container>
       <Wrapper>
         <div className="sgt-detail__wrapper">
+          <Link
+            href={`/nfts/list/${nft?.chain_id}-${nft?.collection_contract_address}`}
+            style={{ position: 'absolute', top: 20, left: 50 }}
+          >
+            <IconButton as="a" scale="sm">
+              <ArrowBackIcon width="32px" />
+            </IconButton>
+          </Link>
           <div className="sgt-detail__left">
             <img
               src={nft?.nft_image ? nft?.nft_image : DEFAULT_NFT_IMAGE}
@@ -365,12 +374,12 @@ export default function SGTDetail() {
                 {
                   label: 'Contract address',
                   value: (
-                    <Link
+                    <AddressLink
                       href={getBlockExploreLink(nft?.collection_contract_address, 'address', ChainId.ENDURANCE)}
                       target="_blank"
                     >
                       {ellipseAddress(nft?.collection_contract_address)}
-                    </Link>
+                    </AddressLink>
                   ),
                 },
                 {
@@ -388,9 +397,9 @@ export default function SGTDetail() {
                 {
                   label: 'Metadata',
                   value: (
-                    <Link href={nft?.metadata ?? ''} target="_blank">
+                    <AddressLink href={nft?.metadata ?? ''} target="_blank">
                       {ellipseAddress(nft?.metadata, 10)}
-                    </Link>
+                    </AddressLink>
                   ),
                 },
               ].map((item) => {

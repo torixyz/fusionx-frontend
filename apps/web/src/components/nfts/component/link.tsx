@@ -20,7 +20,11 @@ const StyledInternalLink = styled('a')`
 `
 
 const InternalLink = function ({ children, ...props }) {
-  return <StyledInternalLink {...props}>{children}</StyledInternalLink>
+  return (
+    <StyledInternalLink {...props} target="_blank">
+      {children}
+    </StyledInternalLink>
+  )
 }
 
 export default InternalLink

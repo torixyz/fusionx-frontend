@@ -1,18 +1,18 @@
+import { Seaport } from '@opensea/seaport-js'
+import { AceIcon, AutoRow, Button, Flex, Link, Loading, QuestionHelper, useModal, useToast } from '@pancakeswap/uikit'
+import ConfirmRecycleModal from 'components/nfts/ConfirmRecycleModal'
+import ListModal from 'components/nfts/ListModal'
+import MakeOfferModal from 'components/nfts/MakeOfferModal'
+import TransferModal from 'components/nfts/TransferModal'
+import { DEFAULT_COLLECTION_AVATAR, DOCKMAN_HOST, SEAPORT_ADDRESS } from 'config/nfts'
 import { useState } from 'react'
 import { ellipseAddress } from 'utils/address'
-import { useAccount } from 'wagmi'
-import { AceIcon, AutoRow, Button, Flex, Link, Loading, useModal, useToast } from '@pancakeswap/uikit'
-import MakeOfferModal from 'components/nfts/MakeOfferModal'
-import ListModal from 'components/nfts/ListModal'
-import { DEFAULT_COLLECTION_AVATAR, DOCKMAN_HOST, SEAPORT_ADDRESS } from 'config/nfts'
 import { displayBalance } from 'utils/display'
-import ConfirmRecycleModal from 'components/nfts/ConfirmRecycleModal'
-import TransferModal from 'components/nfts/TransferModal'
-import { Seaport } from '@opensea/seaport-js'
-import { sleep } from 'utils/sleep'
 import { useEthersSigner } from 'utils/ethers'
-import { Wrapper } from './adventure.style'
+import { sleep } from 'utils/sleep'
+import { useAccount } from 'wagmi'
 import Modal from '../../Modal2'
+import { Wrapper } from './adventure.style'
 
 export default function Adventure({ nft, refetch, list }: { nft: any; refetch: any; list: any }) {
   const [loading, setLoading] = useState(false)
@@ -170,14 +170,19 @@ export default function Adventure({ nft, refetch, list }: { nft: any; refetch: a
 
             {isOwner && (
               <Flex style={{ gap: '10px', marginLeft: 'auto' }}>
-                <Button
-                  onClick={showConfirmRecycleModal}
-                  width="130px"
-                  scale="sm"
-                  variant="tertiary"
-                  style={{ color: '#999' }}
-                >
+                <Button onClick={showConfirmRecycleModal} width="130px" scale="sm">
                   Recycle
+                  <QuestionHelper
+                    text="A brand-new NFT Recycling mechanism, NFT floor price is guaranteed. You can sell your NFT to the official at any time.
+                    Recycling Price = Grand Treasury Pool Balance / (Maximum Total NFT Issuance - Redeemed NFTs) * 95%.
+                    Grand Treasury Pool Balance includes:
+                    * All $ACE funds purchased for $PeACE 
+                    * All trade royalty from ACE Avatar on Tesseract 
+                    * $PeACE - ACE's official liquidity gains
+                    The more NFTs are redeemed and the higher the NFT trading volume, the greater the profit from redemption."
+                    placement="top"
+                    ml="4px"
+                  />
                 </Button>
                 <Button onClick={showListModal} width="130px" scale="sm">
                   List
