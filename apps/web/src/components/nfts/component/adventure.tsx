@@ -13,6 +13,7 @@ import { sleep } from 'utils/sleep'
 import { useAccount } from 'wagmi'
 import Modal from '../../Modal2'
 import { Wrapper } from './adventure.style'
+import AddressLink from './link'
 
 export default function Adventure({ nft, refetch, list }: { nft: any; refetch: any; list: any }) {
   const [loading, setLoading] = useState(false)
@@ -128,7 +129,12 @@ export default function Adventure({ nft, refetch, list }: { nft: any; refetch: a
           <div className="sgt-adventure__user-name">{nft?.collection_name}</div>
         </Link>
         <div className="sgt-adventure__title">{nft?.nft_name}</div>
-        <div className="sgt-adventure__owner">Owner - {ellipseAddress(nft?.owner)}</div>
+        <div className="sgt-adventure__owner">
+          Owner -
+          <AddressLink href={`https://explorer-endurance.fusionist.io/address/${nft?.owner}`}>
+            {ellipseAddress(nft?.owner)}
+          </AddressLink>
+        </div>
         <div className="sgt-adventure__list">
           {dataList.map((item, index) => {
             return (
