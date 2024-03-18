@@ -1,11 +1,12 @@
-import { AceIcon, Box, Button, Column, Loading, useToast } from '@pancakeswap/uikit'
-import { displayBalance } from 'utils/display'
-import { ellipseAddress } from 'utils/address'
-import { useAccount } from 'wagmi'
 import { Seaport } from '@opensea/seaport-js'
+import { AceIcon, Box, Button, Column, Loading, useToast } from '@pancakeswap/uikit'
 import { DOCKMAN_HOST, SEAPORT_ADDRESS } from 'config/nfts'
 import { useState } from 'react'
+import { ellipseAddress } from 'utils/address'
+import { displayBalance } from 'utils/display'
 import { useEthersSigner } from 'utils/ethers'
+import { useAccount } from 'wagmi'
+import Link from './link'
 import { Wrapper } from './offer.style'
 
 const Item = ({ columns, offer, isOwner, refetch }: { columns: any; offer: any; isOwner: boolean; refetch?: any }) => {
@@ -47,7 +48,7 @@ const Item = ({ columns, offer, isOwner, refetch }: { columns: any; offer: any; 
         {offer.quantity}
       </div>
       <div style={{ ...columns[2].style, ...(columns[2].tdStyle || {}) }} className="sensei__table-body-td">
-        {ellipseAddress(offer.from)}
+        <Link href={`https://explorer-endurance.fusionist.io/address/${offer.from}`}>{ellipseAddress(offer.from)}</Link>
       </div>
 
       {isOwner && (
@@ -117,6 +118,7 @@ export default function Offer({ offers, nft, refetch }: { offers: any; nft: any;
               {offers?.map((offer, index) => {
                 return <Item columns={columns} offer={offer} isOwner={isOwner} key={offer?.id} refetch={refetch} />
               })}
+              {!offers.length ? <span className="sensei__table-no-data">No Data</span> : ''}
             </Column>
           </Box>
         </div>

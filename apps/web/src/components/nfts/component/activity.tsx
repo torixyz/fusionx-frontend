@@ -1,12 +1,10 @@
 import { ellipseAddress } from 'utils/address'
 
-import { ChainId } from '@pancakeswap/chains'
 import { Box, Column, Flex } from '@pancakeswap/uikit'
 import dayjs from 'dayjs'
 import { styled } from 'styled-components'
-import { getBlockExploreLink } from 'utils'
 import { displayBalance } from 'utils/display'
-import CopyAddress from './copyAddress'
+import Link from './link'
 
 const ItemRow = styled(Flex)`
   & div {
@@ -88,25 +86,20 @@ export default function Activity({ activities }: { activities: any[] }) {
                       {activity?.activity_type === 'Mint' ? (
                         'Null'
                       ) : (
-                        <CopyAddress address={ellipseAddress(activity?.from)}>
+                        <Link href={`https://explorer-endurance.fusionist.io/address/${activity?.from}`}>
                           {ellipseAddress(activity?.from)}
-                        </CopyAddress>
+                        </Link>
                       )}
                     </Box>
-
                     <Box width="140px">
                       {!activity?.to ? (
                         'Null'
                       ) : (
-                        <CopyAddress
-                          address={getBlockExploreLink(activity?.to, 'address', ChainId.ENDURANCE)}
-                          className="sensei__table-body-td"
-                        >
+                        <Link href={`https://explorer-endurance.fusionist.io/address/${activity?.to}`}>
                           {ellipseAddress(activity?.to, 5)}
-                        </CopyAddress>
+                        </Link>
                       )}
                     </Box>
-
                     <Box width="180px">{dayjs(activity?.time).fromNow()}</Box>
                   </ItemRow>
                 )

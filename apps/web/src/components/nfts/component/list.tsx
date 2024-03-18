@@ -7,6 +7,7 @@ import { displayBalance } from 'utils/display'
 import { useEthersSigner } from 'utils/ethers'
 import { sleep } from 'utils/sleep'
 import { useAccount } from 'wagmi'
+import Link from './link'
 import { Wrapper } from './offer.style'
 
 const Item = ({ list, order, refetch }: { list: any; order: any; refetch?: any }) => {
@@ -87,7 +88,9 @@ const Item = ({ list, order, refetch }: { list: any; order: any; refetch?: any }
         <Text>{order.quantity}</Text>
       </Box>
       <Box width="200px">
-        <Text>{ellipseAddress(order.from)}</Text>
+        <Link href={`https://explorer-endurance.fusionist.io/address/${order.from}`}>
+          <Text>{ellipseAddress(order.from)}</Text>
+        </Link>
       </Box>
       {order.from === address?.toLocaleLowerCase() ? (
         <Button scale="sm" onClick={() => onCancel(order.order_hash)} isLoading={loading}>
