@@ -120,7 +120,7 @@ export default function List({ list, refetch }: { list: any; refetch: any }) {
               {list?.map((l, i) => {
                 return <Item key={l?.id} list={list} order={l} refetch={refetch} />
               })}
-              {!list.length ? <span className="sensei__table-no-data">No Data</span> : ''}
+              {!list?.length ? <span className="sensei__table-no-data">No Data</span> : ''}
             </Column>
           </Box>
         </div>
