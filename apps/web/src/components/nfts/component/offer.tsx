@@ -42,7 +42,7 @@ const Item = ({ columns, offer, isOwner, refetch }: { columns: any; offer: any; 
     <div className="sensei__table-body-tr" key={offer?.id}>
       <div style={{ ...columns[0].style, ...(columns[0].tdStyle || {}) }} className="sensei__table-body-td">
         {displayBalance(offer.price)}
-        <AceIcon />
+        <AceIcon style={{ marginLeft: 8 }} />
       </div>
       <div style={{ ...columns[1].style, ...(columns[1].tdStyle || {}) }} className="sensei__table-body-td">
         {offer.quantity}

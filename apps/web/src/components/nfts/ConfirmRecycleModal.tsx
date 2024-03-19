@@ -1,19 +1,16 @@
-import { AceIcon, Button, InjectedModalProps, Loading, Modal, useToast, Text, Row } from '@pancakeswap/uikit'
 import { useTranslation } from '@pancakeswap/localization'
+import { AceIcon, Button, InjectedModalProps, Loading, Modal, Row, Text, useToast } from '@pancakeswap/uikit'
+import { RECYCLE_ABI, RECYCLE_CONTRACT_ADDRESS } from 'config/nfts'
+import { displayBalance } from 'utils/display'
+import { Address } from 'viem'
 import {
   erc721ABI,
   useAccount,
-  useBalance,
   useContractRead,
   useContractWrite,
   usePrepareContractWrite,
   useWaitForTransaction,
 } from 'wagmi'
-import { useEthersSigner } from 'utils/ethers'
-import { useState } from 'react'
-import { RECYCLE_ABI, RECYCLE_CONTRACT_ADDRESS } from 'config/nfts'
-import { displayBalance } from 'utils/display'
-import { Address } from 'viem'
 
 export interface ListModalProps extends InjectedModalProps {
   contract: Address
@@ -72,7 +69,7 @@ const ConfirmRecycleModal = ({ contract, tokenId, onDismiss, refetch }: ListModa
       <Text mb="10px" fontSize="16px">
         You can receive
       </Text>
-      <Row gap="4px" fontSize="14px">
+      <Row gap="8px" fontSize="14px">
         {displayBalance(buybackAmount, 18, 6)}
         <AceIcon />
       </Row>

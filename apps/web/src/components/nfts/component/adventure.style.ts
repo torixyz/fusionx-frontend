@@ -30,7 +30,7 @@ export const Wrapper = styled.div`
     margin-bottom: 12px;
   }
   .sgt-adventure__owner {
-    font-size: 12px;
+    font-size: 14px;
     line-height: 18px;
     color: rgba(255, 255, 255, 0.72);
   }

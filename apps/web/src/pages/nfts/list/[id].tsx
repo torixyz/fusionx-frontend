@@ -251,46 +251,52 @@ export default function SGTList() {
                   </Box>
                 </Flex>
                 <AutoRow>
-                  <Box width="140px">
+                  <Box width="120px">
                     <Text color="textSubtle" mb="2px">
                       Floor Price
                     </Text>
-                    <AutoRow gap="4px">
+                    <AutoRow gap="8px">
                       <Text>{displayBalance(collection?.collection_floor_price)}</Text>
                       <AceIcon />
                     </AutoRow>
                   </Box>
-                  <Box width="140px">
+                  <Box width="120px">
                     <Text color="textSubtle" mb="2px">
                       Top BID
                     </Text>
-                    <AutoRow gap="4px">
+                    <AutoRow gap="8px">
                       <Text>{displayBalance(collection?.collection_top_bid)}</Text>
                       <AceIcon />
                     </AutoRow>
                   </Box>
                   <Box width="140px">
                     <Text color="textSubtle" mb="2px">
-                      Owners
+                      Recycle Price
                     </Text>
-                    <Text>{collection?.collection_owners}</Text>
+                    <AutoRow gap="8px">
+                      <Text>{displayBalance(collection?.collection_top_bid)}</Text>
+                      <AceIcon />
+                    </AutoRow>
                   </Box>
                   <Box width="140px">
                     <Text color="textSubtle" mb="2px">
-                      Supply
+                      Recycle Pool
                     </Text>
-                    <Text>{collection?.supply}</Text>
+                    <AutoRow gap="8px">
+                      <Text>{displayBalance(collection?.collection_top_bid)}</Text>
+                      <AceIcon />
+                    </AutoRow>
                   </Box>
-                  <Box width="140px">
+                  <Box width="120px">
                     <Text color="textSubtle" mb="2px">
                       1D Volume
                     </Text>
-                    <AutoRow gap="4px">
+                    <AutoRow gap="8px">
                       <Text>{displayBalance(collection?.one_day_volume)}</Text>
                       <AceIcon />
                     </AutoRow>
                   </Box>
-                  <Box>
+                  {/* <Box>
                     <Text color="textSubtle" mb="2px">
                       3D Volume
                     </Text>
@@ -298,6 +304,18 @@ export default function SGTList() {
                       <Text>{displayBalance(collection?.three_day_volume)}</Text>
                       <AceIcon />
                     </AutoRow>
+                  </Box> */}
+                  <Box width="100px">
+                    <Text color="textSubtle" mb="2px">
+                      Supply
+                    </Text>
+                    <Text>{collection?.supply}</Text>
+                  </Box>
+                  <Box width="100px">
+                    <Text color="textSubtle" mb="2px">
+                      Owners
+                    </Text>
+                    <Text>{collection?.collection_owners}</Text>
                   </Box>
                 </AutoRow>
               </Row>
@@ -363,7 +381,7 @@ export default function SGTList() {
                           justifyContent="center"
                           flexShrink={0}
                           width="150px"
-                          style={{ gap: '4px' }}
+                          style={{ gap: '8px' }}
                         >
                           {nft?.price ? (
                             <>
@@ -379,7 +397,7 @@ export default function SGTList() {
                           justifyContent="center"
                           width="150px"
                           flexShrink={0}
-                          style={{ gap: '4px' }}
+                          style={{ gap: '8px' }}
                         >
                           {nft.last_sale_price ? (
                             <>
@@ -395,7 +413,7 @@ export default function SGTList() {
                           alignItems="center"
                           width="150px"
                           flexShrink={0}
-                          style={{ gap: '4px' }}
+                          style={{ gap: '8px' }}
                         >
                           {nft.top_bid ? (
                             <>
