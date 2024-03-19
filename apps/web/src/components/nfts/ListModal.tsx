@@ -1,14 +1,15 @@
-import { Seaport } from '@opensea/seaport-js'
-import { ItemType } from '@opensea/seaport-js/lib/constants'
 import { useTranslation } from '@pancakeswap/localization'
 import { Button, Flex, InjectedModalProps, Loading, Modal, useToast } from '@pancakeswap/uikit'
 import PriceInput from 'components/PriceInput'
 import TokenSelect from 'components/TokenSelect'
-import { DOCKMAN_HOST } from 'config/nfts'
-import { useState } from 'react'
-import { displayBalance } from 'utils/display'
 import { useEthersSigner } from 'utils/ethers'
 import { parseEther } from 'viem'
+import { DOCKMAN_HOST, FEE_ADDRESS, FEE_BASIS_POINTS } from 'config/nfts'
+import { Seaport } from '@opensea/seaport-js'
+import { ItemType } from '@opensea/seaport-js/lib/constants'
+import { useState } from 'react'
+import { displayBalance } from 'utils/display'
+import BigNumber from 'bignumber.js'
 import { useAccount, useBalance } from 'wagmi'
 
 export interface ListModalProps extends InjectedModalProps {
@@ -50,17 +51,23 @@ const ListModal = ({ collectionAddress, tokenId, onDismiss, refetch }: ListModal
         ],
         consideration: [
           {
-            amount: parseEther(amount).toString(),
-            endAmount: parseEther(amount).toString(),
+            amount: new BigNumber(amount)
+              .multipliedBy(95)
+              .multipliedBy(10 ** 16)
+              .toFixed(),
+            endAmount: new BigNumber(amount)
+              .multipliedBy(95)
+              .multipliedBy(10 ** 16)
+              .toFixed(),
             recipient: address,
           },
         ],
-        allowPartialFills: true,
+        fees: [{ recipient: FEE_ADDRESS, basisPoints: FEE_BASIS_POINTS }],
       }
       const { executeAllActions } = await seaport.createOrder(makerOrder, address)
       const order = await executeAllActions()
 
-      fetch(`${DOCKMAN_HOST}/orders`, {
+      const res: any = await fetch(`${DOCKMAN_HOST}/orders`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -69,9 +76,14 @@ const ListModal = ({ collectionAddress, tokenId, onDismiss, refetch }: ListModal
           order,
           chain_id: '648',
         }),
-      })
-      onDismiss?.()
+      }).then((r) => r.json())
+      if (res?.errorCode) {
+        onDismiss?.()
+        toastError(res?.message)
+        return
+      }
       toastSuccess('List successfully')
+      onDismiss?.()
       refetch?.()
     } catch (e) {
       console.error(e)

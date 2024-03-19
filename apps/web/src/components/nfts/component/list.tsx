@@ -1,12 +1,14 @@
 import { Seaport } from '@opensea/seaport-js'
 import { AceIcon, AutoRow, Box, Button, Column, Flex, Loading, Text, useToast } from '@pancakeswap/uikit'
-import { DOCKMAN_HOST, SEAPORT_ADDRESS } from 'config/nfts'
+import { DOCKMAN_HOST, FEE_ADDRESS, SEAPORT_ADDRESS } from 'config/nfts'
 import { useState } from 'react'
 import { ellipseAddress } from 'utils/address'
 import { displayBalance } from 'utils/display'
 import { useEthersSigner } from 'utils/ethers'
 import { sleep } from 'utils/sleep'
 import { useAccount } from 'wagmi'
+import BigNumber from 'bignumber.js'
+import { ItemType } from '@opensea/seaport-js/lib/constants'
 import Link from './link'
 import { Wrapper } from './offer.style'
 
@@ -50,7 +52,10 @@ const Item = ({ list, order, refetch }: { list: any; order: any; refetch?: any }
         overrides: { contractAddress: SEAPORT_ADDRESS },
       })
 
-      const tx = await seaport.fulfillOrder({ order: order.order })
+      console.log(order)
+      const tx = await seaport.fulfillOrder({
+        order: order.order,
+      })
       const res = await tx.executeAllActions()
 
       for (let i = 0; i < 20; i++) {

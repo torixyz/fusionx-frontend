@@ -4,7 +4,11 @@ import { Address } from 'viem'
 // export const DOCKMAN_HOST = 'http://copilot.tpddns.cn:19000'
 export const DOCKMAN_HOST = 'https://api.tesseract.world'
 
-export const SEAPORT_ADDRESS = '0x02587AB8fF3A34188148475Ae463A3F9a0bd1401'
+export const SEAPORT_ADDRESS = '0xFF28baa302C29cFcbe898A10d4AD4f3CA574D02F'
+
+export const FEE_ADDRESS = '0x44fcC28ccC6C765E91dEDcEd37ddF4ff70515a7A'
+
+export const FEE_BASIS_POINTS = 500
 
 export const DEFAULT_NFT_IMAGE = `${ASSET_CDN}/default-nft.png`
 export const DEFAULT_AVATAR = `${ASSET_CDN}/default-avatar.png`

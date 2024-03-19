@@ -449,6 +449,7 @@ export default function SGTDetail() {
                       refetchActivities()
                       refetchOffers()
                       refetchList()
+                      refetchNft()
                     }, 1500)
                   }}
                 />
