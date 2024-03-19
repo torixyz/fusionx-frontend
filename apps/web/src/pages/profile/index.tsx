@@ -16,7 +16,7 @@ const ShowAcePrice = ({ price }: { price: any }) => {
   return (
     <>
       {price ? (
-        <Row gap="4px">
+        <Row gap="8px">
           {displayBalance(price)}
           <AceIcon />
         </Row>

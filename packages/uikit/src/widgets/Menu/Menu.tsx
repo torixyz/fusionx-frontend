@@ -6,14 +6,11 @@ import { AtomBox } from "../../components/AtomBox";
 import BottomNav from "../../components/BottomNav";
 import { Box } from "../../components/Box";
 import Flex from "../../components/Box/Flex";
-import CakePrice from "../../components/CakePrice/CakePrice";
-import Footer from "../../components/Footer";
-import LangSelector from "../../components/LangSelector/LangSelector";
 import MenuItems from "../../components/MenuItems/MenuItems";
 import { SubMenuItems } from "../../components/SubMenuItems";
 import { useMatchBreakpoints } from "../../contexts";
 import Logo from "./components/Logo";
-import { MENU_HEIGHT, MOBILE_MENU_HEIGHT, TOP_BANNER_HEIGHT, TOP_BANNER_HEIGHT_MOBILE } from "./config";
+import { MENU_HEIGHT, TOP_BANNER_HEIGHT, TOP_BANNER_HEIGHT_MOBILE } from "./config";
 import { MenuContext } from "./context";
 import { NavProps } from "./types";
 
@@ -47,6 +44,7 @@ const FixedContainer = styled("div").withConfig({
   height: ${({ height }) => `${height}px`};
   width: 100%;
   z-index: 20;
+  backdrop-filter: blur(10px);
 `;
 
 const TopBannerContainer = styled.div<{ height: number }>`

@@ -1,15 +1,15 @@
-import { Button, Flex, InjectedModalProps, Loading, Modal, ModalBody, useToast } from '@pancakeswap/uikit'
-import { useTranslation } from '@pancakeswap/localization'
-import { useAccount, useBalance } from 'wagmi'
-import PriceInput from 'components/PriceInput'
-import TokenSelect from 'components/TokenSelect'
-import { useEthersSigner } from 'utils/ethers'
-import { parseEther } from 'viem'
-import { DOCKMAN_HOST } from 'config/nfts'
 import { Seaport } from '@opensea/seaport-js'
 import { ItemType } from '@opensea/seaport-js/lib/constants'
+import { useTranslation } from '@pancakeswap/localization'
+import { Button, Flex, InjectedModalProps, Loading, Modal, useToast } from '@pancakeswap/uikit'
+import PriceInput from 'components/PriceInput'
+import TokenSelect from 'components/TokenSelect'
+import { DOCKMAN_HOST } from 'config/nfts'
 import { useState } from 'react'
 import { displayBalance } from 'utils/display'
+import { useEthersSigner } from 'utils/ethers'
+import { parseEther } from 'viem'
+import { useAccount, useBalance } from 'wagmi'
 
 export interface ListModalProps extends InjectedModalProps {
   collectionAddress: string
@@ -92,7 +92,7 @@ const ListModal = ({ collectionAddress, tokenId, onDismiss, refetch }: ListModal
         suffix={<TokenSelect />}
       />
       <Flex justifyContent="space-between" py="10px">
-        <div>Service Fee</div>
+        <div>Collection Fee</div>
         <div>5%</div>
       </Flex>
       {/* <Flex justifyContent="space-between" py="10px"> */}

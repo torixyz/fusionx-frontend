@@ -402,6 +402,10 @@ export default function SGTDetail() {
                     </AddressLink>
                   ),
                 },
+                {
+                  label: 'Collection Fee',
+                  value: '5%',
+                },
               ].map((item) => {
                 return (
                   <AutoRow key={item?.label} justifyContent="space-between" mb="12px">

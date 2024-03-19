@@ -12,11 +12,14 @@ body {
 }
 
 .menu-item {
-  @apply text-gray-500;
+  color: rgba(255, 255, 255, 0.6);
+  &:hover {
+    color: rgba(255, 255, 255, 0.8);
+  }
 }
 
 .menu-item.active {
-  @apply text-white;
+  color: #fff;
 }
 
 .sensei__table-header {
