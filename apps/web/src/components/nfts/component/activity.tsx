@@ -76,7 +76,7 @@ export default function Activity({ activities }: { activities: any[] }) {
             })}
           </div>
           <Box maxHeight="160px">
-            <Column gap="0px" mt="12px">
+            <Column gap="12px" mt="12px">
               {activities?.map((activity, index) => {
                 return (
                   <ItemRow key={activity?.id}>
