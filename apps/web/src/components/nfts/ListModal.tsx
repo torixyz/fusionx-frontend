@@ -51,14 +51,8 @@ const ListModal = ({ collectionAddress, tokenId, onDismiss, refetch }: ListModal
         ],
         consideration: [
           {
-            amount: new BigNumber(amount)
-              .multipliedBy(95)
-              .multipliedBy(10 ** 16)
-              .toFixed(),
-            endAmount: new BigNumber(amount)
-              .multipliedBy(95)
-              .multipliedBy(10 ** 16)
-              .toFixed(),
+            amount: parseEther(amount).toString(),
+            endAmount: parseEther(amount).toString(),
             recipient: address,
           },
         ],
