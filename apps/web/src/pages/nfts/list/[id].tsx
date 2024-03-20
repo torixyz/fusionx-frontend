@@ -385,7 +385,7 @@ export default function SGTList() {
                         >
                           {nft?.price ? (
                             <>
-                              {nft.price}
+                              {displayBalance(nft?.price)}
                               <AceIcon />
                             </>
                           ) : (
