@@ -74,5 +74,6 @@ export function getBlocksSubgraphs({ noderealApiKey }: SubgraphParams) {
     [ChainId.BASE]: 'https://api.studio.thegraph.com/query/48211/base-blocks/version/latest',
     [ChainId.OPBNB]: `https://open-platform-ap.nodereal.io/${noderealApiKey}/opbnb-mainnet-graph-query/subgraphs/name/pancakeswap/blocks`,
     [ChainId.ENDURANCE]: 'https://endurance-subgraph.fusionist.io/subgraphs/name/blocks',
+    [ChainId.ENDURANCE_TESTNET]: 'https://endurance-subgraph.fusionist.io/subgraphs/name/blocks',
   }
 }
