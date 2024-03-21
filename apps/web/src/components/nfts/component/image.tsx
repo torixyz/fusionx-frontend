@@ -3,7 +3,7 @@ import { useState } from 'react'
 const Image = (props) => {
   const [isError, setIsError] = useState(true)
   const defaultImg = '/images/default-error-img.png'
-  const imgErrorFun = (event: any) => {
+  const imgErrorFun = (event) => {
     if (isError) {
       setIsError(false)
       // eslint-disable-next-line no-param-reassign
