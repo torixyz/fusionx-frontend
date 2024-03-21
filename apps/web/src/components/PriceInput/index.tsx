@@ -12,8 +12,18 @@ type IPriceInput = {
   errorMsg?: string
   suffix: React.ReactNode
   disabled?: boolean
+  max?: number
 }
-export default function PriceInput({ label, balance, amount, setAmount, errorMsg, suffix, disabled }: IPriceInput) {
+export default function PriceInput({
+  label,
+  balance,
+  amount,
+  setAmount,
+  errorMsg,
+  suffix,
+  disabled,
+  max,
+}: IPriceInput) {
   return (
     <Wrapper>
       <div className={`price-input__wrapper ${errorMsg ? 'price-input__wrapper--error' : ''}`}>
@@ -39,6 +49,7 @@ export default function PriceInput({ label, balance, amount, setAmount, errorMsg
             onUserInput={(val) => {
               setAmount(val)
             }}
+            max={max}
             disabled={disabled}
           />
           {suffix && <div className="price-input__input-suffix">{suffix}</div>}

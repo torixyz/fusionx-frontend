@@ -1,18 +1,18 @@
-import { Button, Grid, InjectedModalProps, Loading, Modal, useModal, useToast } from '@pancakeswap/uikit'
-import { useTranslation } from '@pancakeswap/localization'
-import { erc20ABI, useAccount, useBalance, useContractRead } from 'wagmi'
-import PriceInput from 'components/PriceInput'
-import { useEthersSigner } from 'utils/ethers'
-import { Address } from 'viem'
-import { DOCKMAN_HOST, FEE_ADDRESS, FEE_BASIS_POINTS, SEAPORT_ADDRESS } from 'config/nfts'
 import { Seaport } from '@opensea/seaport-js'
 import { ItemType } from '@opensea/seaport-js/lib/constants'
+import { useTranslation } from '@pancakeswap/localization'
+import { enduranceTokens } from '@pancakeswap/tokens'
+import { Button, Grid, InjectedModalProps, Loading, Modal, useModal, useToast } from '@pancakeswap/uikit'
+import BigNumber from 'bignumber.js'
+import PriceInput from 'components/PriceInput'
+import WrapACEModal from 'components/nfts/WrapACEModal'
+import { ASSET_CDN } from 'config/constants/endpoints'
+import { DOCKMAN_HOST, FEE_ADDRESS, FEE_BASIS_POINTS, SEAPORT_ADDRESS } from 'config/nfts'
 import { useState } from 'react'
 import { displayBalance } from 'utils/display'
-import { ASSET_CDN } from 'config/constants/endpoints'
-import { enduranceTokens } from '@pancakeswap/tokens'
-import WrapACEModal from 'components/nfts/WrapACEModal'
-import BigNumber from 'bignumber.js'
+import { useEthersSigner } from 'utils/ethers'
+import { Address } from 'viem'
+import { erc20ABI, useAccount, useBalance, useContractRead } from 'wagmi'
 
 export interface MakeOfferModalProps extends InjectedModalProps {
   collectionAddress: string
@@ -133,6 +133,7 @@ const MakeOfferModal = ({ collectionAddress, tokenId, onDismiss, refetch }: Make
             </div>
           </>
         }
+        max={999999}
       />
       <Grid gridTemplateColumns="1fr 1fr" gridColumnGap="12px">
         <Button mt="20px" onClick={onMakeOffer} isLoading={loading}>

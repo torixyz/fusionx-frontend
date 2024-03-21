@@ -1,15 +1,14 @@
+import { Seaport } from '@opensea/seaport-js'
+import { ItemType } from '@opensea/seaport-js/lib/constants'
 import { useTranslation } from '@pancakeswap/localization'
 import { Button, Flex, InjectedModalProps, Loading, Modal, useToast } from '@pancakeswap/uikit'
 import PriceInput from 'components/PriceInput'
 import TokenSelect from 'components/TokenSelect'
-import { useEthersSigner } from 'utils/ethers'
-import { parseEther } from 'viem'
 import { DOCKMAN_HOST, FEE_ADDRESS, FEE_BASIS_POINTS, SEAPORT_ADDRESS } from 'config/nfts'
-import { Seaport } from '@opensea/seaport-js'
-import { ItemType } from '@opensea/seaport-js/lib/constants'
 import { useState } from 'react'
 import { displayBalance } from 'utils/display'
-import BigNumber from 'bignumber.js'
+import { useEthersSigner } from 'utils/ethers'
+import { parseEther } from 'viem'
 import { useAccount, useBalance } from 'wagmi'
 
 export interface ListModalProps extends InjectedModalProps {
@@ -96,6 +95,7 @@ const ListModal = ({ collectionAddress, tokenId, onDismiss, refetch }: ListModal
         setAmount={setAmount}
         errorMsg=""
         suffix={<TokenSelect />}
+        max={999999}
       />
       <Flex justifyContent="space-between" py="10px">
         <div>Collection Fee</div>

@@ -15,6 +15,7 @@ import { ellipseAddress } from 'utils/address'
 import Tag from '../../../components/Tag/tag'
 import Activity from '../../../components/nfts/component/activity'
 import Adventure from '../../../components/nfts/component/adventure'
+import Image from '../../../components/nfts/component/image'
 import AddressLink from '../../../components/nfts/component/link'
 import Offer from '../../../components/nfts/component/offer'
 
@@ -58,7 +59,7 @@ export const Wrapper = styled.div`
     width: 100%;
     height: auto;
     border: 1px solid rgba(74, 74, 76, 1);
-    border-radius: 8px;
+    border-radius: 16px;
   }
 
   .sgt-detail__left-trait-box {
@@ -326,7 +327,7 @@ export default function SGTDetail() {
             </IconButton>
           </Link>
           <div className="sgt-detail__left">
-            <img
+            <Image
               src={nft?.nft_image ? nft?.nft_image : DEFAULT_NFT_IMAGE}
               alt="game"
               className="sgt-detail__left-image"

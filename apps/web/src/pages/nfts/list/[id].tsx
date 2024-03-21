@@ -27,6 +27,7 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import { styled } from 'styled-components'
 import { ellipseAddress } from 'utils/address'
 import { displayBalance } from 'utils/display'
+import Image from '../../../components/nfts/component/image'
 import AddressLink from '../../../components/nfts/component/link'
 
 const NFTImage = styled.img`
@@ -240,7 +241,7 @@ export default function SGTList() {
               <Row alignItems="center">
                 <Flex mr="30px">
                   <Box width="80px" ml="5px">
-                    <img
+                    <Image
                       src={collection?.collection_avatar ?? DEFAULT_COLLECTION_AVATAR}
                       alt="avatar"
                       style={{ width: '80px', height: '80px', border: '1px solid #fff', borderRadius: 4 }}
@@ -363,11 +364,12 @@ export default function SGTList() {
                         }}
                       >
                         <Flex flexShrink={0} alignItems="center" width="180px">
-                          <NFTImage
+                          <Image
                             width={60}
                             height={60}
                             src={nft?.nft_image ? nft?.nft_image : DEFAULT_NFT_IMAGE}
                             alt="avatar"
+                            style={{ border: '1px solid #fff', borderRadius: 4 }}
                           />
                           <Text fontSize="13px" ml="10px">
                             {nft?.nft_name ? nft?.nft_name : `#${nft?.token_id}`}

@@ -13,6 +13,7 @@ import { sleep } from 'utils/sleep'
 import { useAccount } from 'wagmi'
 import Modal from '../../Modal2'
 import { Wrapper } from './adventure.style'
+import Image from './image'
 import AddressLink from './link'
 
 export default function Adventure({ nft, refetch, list }: { nft: any; refetch: any; list: any }) {
@@ -121,7 +122,7 @@ export default function Adventure({ nft, refetch, list }: { nft: any; refetch: a
     <Wrapper>
       <div className="sgt-adventure__wrapper">
         <Link href={`/nfts/list/${nft?.chain_id}-${nft?.collection_contract_address}`} className="sgt-adventure__user">
-          <img
+          <Image
             src={nft?.collection_avatar ?? DEFAULT_COLLECTION_AVATAR}
             alt="avatar"
             className="sgt-adventure__user-avatar"
