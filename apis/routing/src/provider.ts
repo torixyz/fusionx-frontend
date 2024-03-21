@@ -1,4 +1,4 @@
-import { ChainId, endurance, getV3Subgraphs } from '@pancakeswap/chains'
+import { ChainId, endurance, enduranceTestnet, getV3Subgraphs } from '@pancakeswap/chains'
 import { OnChainProvider, SubgraphProvider } from '@pancakeswap/smart-router/evm'
 import { createPublicClient, http } from 'viem'
 import { GraphQLClient } from 'graphql-request'
@@ -20,11 +20,18 @@ const enduranceClient = createPublicClient({
   transport: http(ENDURANCE_NODE),
 })
 
+const enduranceTestnetClient = createPublicClient({
+  chain: enduranceTestnet,
+  transport: http(ENDURANCE_TESTNET_NODE),
+})
+
 // @ts-ignore
 export const viemProviders: OnChainProvider = ({ chainId }: { chainId?: ChainId }) => {
   switch (chainId) {
     case ChainId.ENDURANCE:
       return enduranceClient
+    case ChainId.ENDURANCE_TESTNET:
+      return enduranceTestnetClient
     default:
       return enduranceClient
   }

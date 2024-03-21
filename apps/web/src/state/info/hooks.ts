@@ -342,8 +342,10 @@ export const useChainNameByQuery = (): MultiChainName => {
         return 'BASE'
       case 'opbnb':
         return 'OPBNB'
+      case 'endurance':
+        return 'ENDURANCE'
       default:
-        return 'BSC'
+        return 'ENDURANCE'
     }
   }, [query])
   return chainName

@@ -22,6 +22,7 @@ export const chainNames: Record<ChainId, string> = {
   [ChainId.ARBITRUM_SEPOLIA]: 'arbSepolia',
   [ChainId.BASE_SEPOLIA]: 'baseSepolia',
   [ChainId.ENDURANCE]: 'endurance',
+  [ChainId.ENDURANCE_TESTNET]: 'enduranceTestnet',
 }
 
 export const chainNameToChainId = Object.entries(chainNames).reduce((acc, [chainId, chainName]) => {
@@ -55,4 +56,5 @@ export const defiLlamaChainNames: Record<ChainId, string> = {
   [ChainId.ARBITRUM_SEPOLIA]: '',
   [ChainId.BASE_SEPOLIA]: '',
   [ChainId.ENDURANCE]: '',
+  [ChainId.ENDURANCE_TESTNET]: '',
 }

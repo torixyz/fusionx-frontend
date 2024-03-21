@@ -1,6 +1,7 @@
 import { ChainId } from '@pancakeswap/chains'
 import { ERC20Token } from '@pancakeswap/sdk'
 import { enduranceTokens } from './endurance'
+import { enduranceTestnetTokens } from './enduranceTestnet'
 
 export const CAKE_MAINNET = new ERC20Token(
   ChainId.BSC,
@@ -403,5 +404,6 @@ export const STABLE_COIN = {
   [ChainId.SEPOLIA]: USDC[ChainId.SEPOLIA],
   [ChainId.ARBITRUM_SEPOLIA]: USDC[ChainId.ARBITRUM_SEPOLIA],
   [ChainId.BASE_SEPOLIA]: USDC[ChainId.BASE_SEPOLIA],
-  [ChainId.ENDURANCE]: enduranceTokens.aceUSD,
+  [ChainId.ENDURANCE]: enduranceTokens.aapfp,
+  [ChainId.ENDURANCE_TESTNET]: enduranceTestnetTokens.wace,
 } satisfies Record<ChainId, ERC20Token>

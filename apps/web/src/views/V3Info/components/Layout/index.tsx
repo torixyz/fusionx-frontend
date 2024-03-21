@@ -35,7 +35,6 @@ export const InfoPageLayout = ({ children }) => {
 
   return (
     <>
-      <SubMenuItems items={subMenuItems} activeItem={isV3 ? `/info/v3${chainPath}` : `/info${chainPath}`} />
       <InfoNav isStableSwap={false} />
       {children}
     </>

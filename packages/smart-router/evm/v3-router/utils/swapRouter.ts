@@ -211,6 +211,7 @@ export abstract class SwapRouter {
             amountOutMinimum: performAggregatedSlippageCheck ? 0n : amountOut,
             sqrtPriceLimitX96: 0n,
           }
+          console.log('encodeV3', exactInputSingleParams)
 
           calldatas.push(
             encodeFunctionData({
@@ -560,6 +561,7 @@ export abstract class SwapRouter {
       calldatas.push(SelfPermit.encodePermit(sampleTrade.inputAmount.currency, options.inputTokenPermit))
     }
 
+    console.log(trades)
     for (const trade of trades) {
       if (trade.routes.length === 1 && trade.routes[0].type === RouteType.V2) {
         calldatas.push(SwapRouter.encodeV2Swap(trade, options, routerMustCustody, performAggregatedSlippageCheck))

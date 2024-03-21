@@ -49,7 +49,7 @@ const MakeOfferModal = ({ collectionAddress, tokenId, onDismiss, refetch }: Make
     try {
       // @ts-ignore
       const seaport = new Seaport(signer, {
-        overrides: { contractAddress: '0xFF28baa302C29cFcbe898A10d4AD4f3CA574D02F' },
+        overrides: { contractAddress: SEAPORT_ADDRESS },
       })
 
       const takerOrder = {

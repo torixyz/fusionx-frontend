@@ -13,7 +13,7 @@ export const fetchAceTokenPrice = async (tokenAddress: string) => {
   const blocks = await getBlocksFromTimestamps(timestampsArray, 'desc', 1000, 'BSC')
 
   const result = await fetchedTokenDatas(
-    v3InfoClients[ChainId.BSC],
+    v3InfoClients[ChainId.ENDURANCE],
     [tokenAddress.toLowerCase()],
     blocks?.filter((d) => d.number >= SUBGRAPH_START_BLOCK[ChainId.BSC]),
   )

@@ -4,7 +4,7 @@ import PriceInput from 'components/PriceInput'
 import TokenSelect from 'components/TokenSelect'
 import { useEthersSigner } from 'utils/ethers'
 import { parseEther } from 'viem'
-import { DOCKMAN_HOST, FEE_ADDRESS, FEE_BASIS_POINTS } from 'config/nfts'
+import { DOCKMAN_HOST, FEE_ADDRESS, FEE_BASIS_POINTS, SEAPORT_ADDRESS } from 'config/nfts'
 import { Seaport } from '@opensea/seaport-js'
 import { ItemType } from '@opensea/seaport-js/lib/constants'
 import { useState } from 'react'
@@ -34,7 +34,7 @@ const ListModal = ({ collectionAddress, tokenId, onDismiss, refetch }: ListModal
     try {
       // @ts-ignore
       const seaport = new Seaport(signer, {
-        overrides: { contractAddress: '0xFF28baa302C29cFcbe898A10d4AD4f3CA574D02F' },
+        overrides: { contractAddress: SEAPORT_ADDRESS },
       })
 
       const makerOrder = {

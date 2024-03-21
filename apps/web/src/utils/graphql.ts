@@ -49,6 +49,7 @@ export const v3Clients = {
   [ChainId.SCROLL_SEPOLIA]: new GraphQLClient(V3_SUBGRAPH_URLS[ChainId.SCROLL_SEPOLIA]),
   [ChainId.OPBNB]: new GraphQLClient(V3_SUBGRAPH_URLS[ChainId.OPBNB]),
   [ChainId.ENDURANCE]: new GraphQLClient(V3_SUBGRAPH_URLS[ChainId.ENDURANCE]),
+  [ChainId.ENDURANCE_TESTNET]: new GraphQLClient(V3_SUBGRAPH_URLS[ChainId.ENDURANCE_TESTNET]),
 }
 
 export const v3InfoClients = { ...v3Clients, [ChainId.BSC]: new GraphQLClient(V3_BSC_INFO_CLIENT) }

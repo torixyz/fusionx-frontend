@@ -1,4 +1,4 @@
-import { ChainId, endurance } from '@pancakeswap/chains'
+import { ChainId, endurance, enduranceTestnet } from '@pancakeswap/chains'
 import { getNodeRealUrl } from 'utils/node/nodeReal'
 import { getGroveUrl } from 'utils/node/pokt'
 import {
@@ -84,6 +84,7 @@ export const SERVER_NODES = {
   [ChainId.ARBITRUM_SEPOLIA]: arbitrumSepolia.rpcUrls.public.http,
   [ChainId.BASE_SEPOLIA]: baseSepolia.rpcUrls.public.http,
   [ChainId.ENDURANCE]: endurance.rpcUrls.public.http,
+  [ChainId.ENDURANCE_TESTNET]: enduranceTestnet.rpcUrls.public.http,
 } satisfies Record<ChainId, readonly string[]>
 
 export const PUBLIC_NODES = {
@@ -157,4 +158,5 @@ export const PUBLIC_NODES = {
   [ChainId.ARBITRUM_SEPOLIA]: arbitrumSepolia.rpcUrls.public.http,
   [ChainId.BASE_SEPOLIA]: baseSepolia.rpcUrls.public.http,
   [ChainId.ENDURANCE]: endurance.rpcUrls.public.http,
+  [ChainId.ENDURANCE_TESTNET]: enduranceTestnet.rpcUrls.public.http,
 } satisfies Record<ChainId, readonly string[]>

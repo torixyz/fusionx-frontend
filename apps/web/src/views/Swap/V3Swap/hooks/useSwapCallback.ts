@@ -59,6 +59,7 @@ export function useSwapCallback({
   const { recipient: recipientAddress } = useSwapState()
   const recipient = recipientAddress === null ? account : recipientAddress
 
+  console.log(deadline)
   const swapCalls = useSwapCallArguments(
     trade,
     allowedSlippage,

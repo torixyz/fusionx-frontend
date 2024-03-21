@@ -112,7 +112,7 @@ export default function Home() {
   return (
     <Page>
       <Heading scale="lg" mb="16px">
-        {t('PancakeSwap Info & Analytics')}
+        {t('Analytics')}
       </Heading>
       <ChartCardsContainer>
         <Card>

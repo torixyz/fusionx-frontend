@@ -1,15 +1,15 @@
-import { encodeFunctionData, Hex } from 'viem'
 import { BigintIsh, Currency, CurrencyAmount, Percent, TradeType, validateAndParseAddress } from '@pancakeswap/sdk'
+import { Hex, encodeFunctionData } from 'viem'
 
 import invariant from 'tiny-invariant'
 import { swapRouterABI } from './abi/SwapRouter'
-import { Trade } from './entities/trade'
 import { ADDRESS_ZERO } from './constants'
+import { Trade } from './entities/trade'
+import { Multicall } from './multicall'
+import { FeeOptions, Payments } from './payments'
 import { PermitOptions, SelfPermit } from './selfPermit'
 import { encodeRouteToPath } from './utils'
 import { MethodParameters, toHex } from './utils/calldata'
-import { Multicall } from './multicall'
-import { FeeOptions, Payments } from './payments'
 
 /**
  * Options for producing the arguments to send calls to the router.
@@ -123,6 +123,7 @@ export abstract class SwapRouter {
         // flag for whether the trade is single hop or not
         const singleHop = route.pools.length === 1
 
+        console.log(singleHop)
         if (singleHop) {
           if (trade.tradeType === TradeType.EXACT_INPUT) {
             const exactInputSingleParams = {
@@ -135,6 +136,7 @@ export abstract class SwapRouter {
               amountOutMinimum: amountOut,
               sqrtPriceLimitX96: BigInt(options.sqrtPriceLimitX96 ?? 0),
             }
+            console.log(exactInputSingleParams)
             calldatas.push(
               encodeFunctionData({
                 abi: SwapRouter.ABI,

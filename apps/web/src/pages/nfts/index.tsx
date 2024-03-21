@@ -61,7 +61,6 @@ const CollectionSwiperItemMeta = styled.div`
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(8px);
 `
-
 export default function Index() {
   const { data } = useQuery({
     queryKey: ['nftCollections'],

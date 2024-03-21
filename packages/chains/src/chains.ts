@@ -25,3 +25,29 @@ export const endurance = defineChain({
   },
   testnet: false,
 })
+
+export const enduranceTestnet = defineChain({
+  id: 6480,
+  name: 'EnduranceTestnet',
+  network: 'enduranceTestnet',
+  nativeCurrency: {
+    decimals: 18,
+    name: 'ACE',
+    symbol: 'ACE',
+  },
+  rpcUrls: {
+    default: { http: ['https://abcdefg-myrpctestnet.fusionist.io'] },
+    public: { http: ['https://abcdefg-myrpctestnet.fusionist.io'] },
+  },
+  blockExplorers: {
+    etherscan: { name: 'EnduranceScan', url: 'https://abcdefg-myexplorertestnet.fusionist.io' },
+    default: { name: 'EnduranceScan', url: 'https://abcdefg-myexplorertestnet.fusionist.io' },
+  },
+  contracts: {
+    multicall3: {
+      address: '0x64e9e59cBd418C45bC1E225b302da51f0EcFd767',
+      blockCreated: 103338,
+    },
+  },
+  testnet: false,
+})

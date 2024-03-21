@@ -32,6 +32,7 @@ export const FACTORY_ADDRESS_MAP = {
   [ChainId.ARBITRUM_SEPOLIA]: '0x02a84c1b3BBD7401a5f7fa98a384EBC70bB5749E',
   [ChainId.BASE_SEPOLIA]: '0x02a84c1b3BBD7401a5f7fa98a384EBC70bB5749E',
   [ChainId.ENDURANCE]: '0xd57C17d5Aa1912Fce0e6aA3d43b48817AB569aB6',
+  [ChainId.ENDURANCE_TESTNET]: '0x8e19ceDEa5321640b2E374062bd9898D8853A602',
 } as const satisfies Record<ChainId, Address>
 
 export const INIT_CODE_HASH = '0x00fb7f630766e6a796048ea87d01acd3068e8ff67d078148a3fa3f4a84f69bd5'
@@ -59,6 +60,7 @@ export const INIT_CODE_HASH_MAP = {
   [ChainId.ARBITRUM_SEPOLIA]: INIT_CODE_HASH_ETH,
   [ChainId.BASE_SEPOLIA]: INIT_CODE_HASH_ETH,
   [ChainId.ENDURANCE]: INIT_CODE_HASH_ETH,
+  [ChainId.ENDURANCE_TESTNET]: INIT_CODE_HASH_ETH,
 } as const satisfies Record<ChainId, Hash>
 
 export const WETH9 = {
@@ -241,6 +243,14 @@ export const WACE = {
     'Wrapped Ace',
     'https://www.fusionist.io'
   ),
+  [ChainId.ENDURANCE_TESTNET]: new ERC20Token(
+    ChainId.ENDURANCE_TESTNET,
+    '0x5Eb55Dadccc8858D11926dEB145F8c62f6a56af1',
+    18,
+    'WACE',
+    'Wrapped Ace',
+    'https://www.fusionist.io'
+  ),
 }
 
 export const WBNB = {
@@ -308,6 +318,7 @@ export const WNATIVE = {
   [ChainId.ARBITRUM_SEPOLIA]: WETH9[ChainId.ARBITRUM_SEPOLIA],
   [ChainId.BASE_SEPOLIA]: WETH9[ChainId.BASE_SEPOLIA],
   [ChainId.ENDURANCE]: WACE[ChainId.ENDURANCE],
+  [ChainId.ENDURANCE_TESTNET]: WACE[ChainId.ENDURANCE_TESTNET],
 } satisfies Record<ChainId, ERC20Token>
 
 const ETHER = { name: 'Ether', symbol: 'ETH', decimals: 18 } as const
@@ -363,6 +374,11 @@ export const NATIVE = {
     decimals: 18,
   },
   [ChainId.ENDURANCE]: {
+    name: 'ACE',
+    symbol: 'ACE',
+    decimals: 18,
+  },
+  [ChainId.ENDURANCE_TESTNET]: {
     name: 'ACE',
     symbol: 'ACE',
     decimals: 18,

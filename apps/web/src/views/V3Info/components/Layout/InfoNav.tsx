@@ -4,6 +4,7 @@ import {
   Box,
   ButtonMenu,
   ButtonMenuItem,
+  Container,
   Flex,
   Text,
   UserMenu,
@@ -25,13 +26,12 @@ import { v3InfoPath } from '../../constants'
 import Search from '../Search'
 
 const NavWrapper = styled(Flex)`
-  background: ${({ theme }) => theme.colors.gradientCardHeader};
   justify-content: space-between;
-  padding: 20px 16px;
+  padding: 20px 0px;
   flex-direction: column;
   gap: 8px;
   ${({ theme }) => theme.mediaQueries.sm} {
-    padding: 20px 40px;
+    padding: 20px 0px;
     flex-direction: row;
   }
 `
@@ -51,27 +51,28 @@ const InfoNav: React.FC<{ isStableSwap: boolean }> = ({ isStableSwap }) => {
   }, [router.pathname])
   const stableSwapQuery = isStableSwap ? '?type=stableSwap' : ''
   return (
-    <NavWrapper>
-      <Flex>
-        <Box>
-          <ButtonMenu activeIndex={activeIndex} scale="sm" variant="subtle">
-            <ButtonMenuItem as={NextLinkFromReactRouter} to={`/${v3InfoPath}${chainPath}${stableSwapQuery}`}>
-              {t('Overview')}
-            </ButtonMenuItem>
-            <ButtonMenuItem as={NextLinkFromReactRouter} to={`/${v3InfoPath}${chainPath}/pairs${stableSwapQuery}`}>
-              {t('Pairs')}
-            </ButtonMenuItem>
-            <ButtonMenuItem as={NextLinkFromReactRouter} to={`/${v3InfoPath}${chainPath}/tokens${stableSwapQuery}`}>
-              {t('Tokens')}
-            </ButtonMenuItem>
-          </ButtonMenu>
-        </Box>
-        <NetworkSwitcher activeIndex={activeIndex} />
-      </Flex>
-      <Box width={['100%', '100%', '250px']}>
-        <Search />
-      </Box>
-    </NavWrapper>
+    <Container>
+      <NavWrapper>
+        <Flex>
+          <Box>
+            <ButtonMenu activeIndex={activeIndex} scale="sm" variant="subtle">
+              <ButtonMenuItem as={NextLinkFromReactRouter} to={`/${v3InfoPath}${chainPath}${stableSwapQuery}`}>
+                {t('Overview')}
+              </ButtonMenuItem>
+              <ButtonMenuItem as={NextLinkFromReactRouter} to={`/${v3InfoPath}${chainPath}/pairs${stableSwapQuery}`}>
+                {t('Pairs')}
+              </ButtonMenuItem>
+              <ButtonMenuItem as={NextLinkFromReactRouter} to={`/${v3InfoPath}${chainPath}/tokens${stableSwapQuery}`}>
+                {t('Tokens')}
+              </ButtonMenuItem>
+            </ButtonMenu>
+          </Box>
+        </Flex>
+        {/* <Box width={['100%', '100%', '250px']}> */}
+        {/*  <Search /> */}
+        {/* </Box> */}
+      </NavWrapper>
+    </Container>
   )
 }
 

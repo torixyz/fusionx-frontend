@@ -1,4 +1,4 @@
-import { ChainId, chainNames, endurance } from '@pancakeswap/chains'
+import { ChainId, chainNames, endurance, enduranceTestnet } from '@pancakeswap/chains'
 import memoize from 'lodash/memoize'
 import {
   Chain,
@@ -74,4 +74,4 @@ export const L2_CHAIN_IDS: ChainId[] = [
   ChainId.BASE_SEPOLIA,
 ]
 
-export const CHAINS = [endurance]
+export const CHAINS = [endurance, enduranceTestnet]

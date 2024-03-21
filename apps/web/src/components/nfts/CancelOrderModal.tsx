@@ -5,7 +5,7 @@ import PriceInput from 'components/PriceInput'
 import TokenSelect from 'components/TokenSelect'
 import { useEthersSigner } from 'utils/ethers'
 import { parseEther } from 'viem'
-import { DOCKMAN_HOST } from 'config/nfts'
+import { DOCKMAN_HOST, SEAPORT_ADDRESS } from 'config/nfts'
 import { Seaport } from '@opensea/seaport-js'
 import { ItemType } from '@opensea/seaport-js/lib/constants'
 import { useState } from 'react'
@@ -31,7 +31,7 @@ const CancelOrderModal = ({ onDismiss, refetch }: ListModalProps) => {
     try {
       // @ts-ignore
       const seaport = new Seaport(signer, {
-        overrides: { contractAddress: '0xFF28baa302C29cFcbe898A10d4AD4f3CA574D02F' },
+        overrides: { contractAddress: SEAPORT_ADDRESS },
       })
 
       onDismiss?.()
