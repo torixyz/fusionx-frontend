@@ -1,15 +1,13 @@
 import { Seaport } from '@opensea/seaport-js'
 import { AceIcon, AutoRow, Box, Button, Column, Flex, Loading, Text, useToast } from '@pancakeswap/uikit'
-import { DOCKMAN_HOST, FEE_ADDRESS, SEAPORT_ADDRESS } from 'config/nfts'
+import { DOCKMAN_HOST, SEAPORT_ADDRESS } from 'config/nfts'
 import { useState } from 'react'
 import { ellipseAddress } from 'utils/address'
 import { displayBalance } from 'utils/display'
 import { useEthersSigner } from 'utils/ethers'
 import { sleep } from 'utils/sleep'
 import { useAccount } from 'wagmi'
-import BigNumber from 'bignumber.js'
-import { ItemType } from '@opensea/seaport-js/lib/constants'
-import Link from './link'
+import AddressLink from './link'
 import { Wrapper } from './offer.style'
 
 const Item = ({ list, order, refetch }: { list: any; order: any; refetch?: any }) => {
@@ -52,10 +50,7 @@ const Item = ({ list, order, refetch }: { list: any; order: any; refetch?: any }
         overrides: { contractAddress: SEAPORT_ADDRESS },
       })
 
-      console.log(order)
-      const tx = await seaport.fulfillOrder({
-        order: order.order,
-      })
+      const tx = await seaport.fulfillOrder({ order: order.order })
       const res = await tx.executeAllActions()
 
       for (let i = 0; i < 20; i++) {
@@ -93,9 +88,9 @@ const Item = ({ list, order, refetch }: { list: any; order: any; refetch?: any }
         <Text>{order.quantity}</Text>
       </Box>
       <Box width="200px">
-        <Link href={`https://explorer-endurance.fusionist.io/address/${order.from}`}>
-          <Text>{ellipseAddress(order.from)}</Text>
-        </Link>
+        <AddressLink href={`https://explorer-endurance.fusionist.io/address/${order.from}`}>
+          {ellipseAddress(order.from)}
+        </AddressLink>
       </Box>
       {order.from === address?.toLocaleLowerCase() ? (
         <Button scale="sm" onClick={() => onCancel(order.order_hash)} isLoading={loading}>

@@ -1,13 +1,13 @@
-import { AceIcon, Box, Button, Column, Loading, useToast } from '@pancakeswap/uikit'
-import { displayBalance } from 'utils/display'
-import { ellipseAddress } from 'utils/address'
-import { useAccount } from 'wagmi'
 import { Seaport } from '@opensea/seaport-js'
+import { AceIcon, Box, Button, Column, Loading, useToast } from '@pancakeswap/uikit'
 import { DOCKMAN_HOST, SEAPORT_ADDRESS } from 'config/nfts'
 import { useState } from 'react'
+import { ellipseAddress } from 'utils/address'
+import { displayBalance } from 'utils/display'
 import { useEthersSigner } from 'utils/ethers'
 import { sleep } from 'utils/sleep'
-import Link from 'next/link'
+import { useAccount } from 'wagmi'
+import AddressLink from './link'
 import { Wrapper } from './offer.style'
 
 const Item = ({ columns, offer, isOwner, refetch }: { columns: any; offer: any; isOwner: boolean; refetch?: any }) => {
@@ -66,7 +66,9 @@ const Item = ({ columns, offer, isOwner, refetch }: { columns: any; offer: any; 
         {offer.quantity}
       </div>
       <div style={{ ...columns[2].style, ...(columns[2].tdStyle || {}) }} className="sensei__table-body-td">
-        <Link href={`https://explorer-endurance.fusionist.io/address/${offer.from}`}>{ellipseAddress(offer.from)}</Link>
+        <AddressLink href={`https://explorer-endurance.fusionist.io/address/${offer.from}`}>
+          {ellipseAddress(offer.from)}
+        </AddressLink>
       </div>
 
       {isOwner && (
