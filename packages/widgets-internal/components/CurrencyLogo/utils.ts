@@ -47,6 +47,7 @@ const chainName: { [key: number]: string } = {
   [ChainId.BASE]: "base",
   [ChainId.OPBNB]: "opbnb",
   [ChainId.ENDURANCE]: "endurance",
+  [ChainId.ENDURANCE_TESTNET]: "endurance_testnet",
 };
 
 // TODO: move to utils or token-list

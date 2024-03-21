@@ -45,6 +45,7 @@ export const multiChainName: Record<number | string, MultiChainNameExtend> = {
   [ChainId.BASE]: 'BASE',
   [ChainId.OPBNB]: 'OPBNB',
   [ChainId.ENDURANCE]: 'ENDURANCE',
+  [ChainId.ENDURANCE_TESTNET]: 'ENDURANCE_TESTNET',
 }
 
 export const multiChainShortName: Record<number, string> = {
