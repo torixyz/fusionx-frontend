@@ -60,6 +60,13 @@ const CurrencyInputHeader: React.FC<React.PropsWithChildren<Props>> = memo(({ ti
   const [isRoutingSettingChange] = useRoutingSettingChanged()
   const [onPresentTransactionsModal] = useModal(<TransactionsModal />)
 
+  const { isChartSupported, isChartDisplayed, setIsChartDisplayed, isHotTokenSupported } =
+    useContext(SwapFeaturesContext)
+  const toggleChartDisplayed = () => {
+    setIsChartDisplayed?.((currentIsChartDisplayed) => !currentIsChartDisplayed)
+  }
+  const [isSwapHotTokenDisplay, setIsSwapHotTokenDisplay] = useSwapHotTokenDisplay()
+
   const mobileTooltipClickOutside = useCallback(() => {
     setMobileTooltipShow(false)
   }, [])
@@ -100,6 +107,19 @@ const CurrencyInputHeader: React.FC<React.PropsWithChildren<Props>> = memo(({ ti
         >
           <HistoryIcon color="textSubtle" width="24px" />
         </IconButton>
+        <ColoredIconButton
+          onClick={() => {
+            if (!isChartDisplayed && isSwapHotTokenDisplay) {
+              setIsSwapHotTokenDisplay(false)
+            }
+            toggleChartDisplayed()
+          }}
+          variant="text"
+          scale="sm"
+          data-dd-action-name="Price chart button"
+        >
+          {isChartDisplayed ? <ChartDisableIcon color="textSubtle" /> : <ChartIcon width="24px" color="textSubtle" />}
+        </ColoredIconButton>
       </Flex>
     </Flex>
   )

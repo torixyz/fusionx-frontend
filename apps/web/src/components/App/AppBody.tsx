@@ -3,8 +3,11 @@ import { Card, CardProps } from '@pancakeswap/uikit'
 
 export const BodyWrapper = styled(Card)`
   border-radius: 12px;
-  max-width: 480px;
-  width: 100%;
+  max-width: 100%;
+  width: 480px;
+  @media (max-width: 500px) {
+    width: 380px;
+  }
   z-index: 1;
 `
 
