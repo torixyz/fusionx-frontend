@@ -20,6 +20,8 @@ import { styled } from 'styled-components'
 import { getTokenNameAlias, getTokenSymbolAlias } from 'utils/getTokenAlias'
 import { CurrencyLogo } from 'views/Info/components/CurrencyLogo'
 import { Arrow, Break, ClickableColumnHeader, PageButtons, TableWrapper } from 'views/Info/components/InfoTables/shared'
+import { Token } from '@pancakeswap/swap-sdk-core'
+import { ChainId } from '@pancakeswap/chains'
 import { TOKEN_HIDE, v3InfoPath } from '../../constants'
 import { TokenData } from '../../types'
 import { formatDollarAmount } from '../../utils/numbers'
@@ -89,7 +91,20 @@ const DataRow = ({ tokenData, index, chainPath }: { tokenData: TokenData; index:
         <Text>{index + 1}</Text>
         <Flex>
           <RowFixed>
-            <ResponsiveLogo address={tokenData.address} chainName={chainName} />
+            <ResponsiveLogo
+              token={
+                new Token(
+                  ChainId.ENDURANCE,
+                  tokenData.address as `0x{string}`,
+                  tokenData.decimals,
+                  tokenData.symbol,
+                  tokenData.name,
+                  '',
+                )
+              }
+              address={tokenData.address}
+              chainName={chainName}
+            />
           </RowFixed>
 
           <Text style={{ marginLeft: '10px' }}>
@@ -154,6 +169,7 @@ export default function TokenTable({
   }, [maxItems, tokenDatas])
 
   const sortedTokens = useMemo(() => {
+    console.log(tokenDatas, 'fuck tokens', chainId, TOKEN_HIDE?.[chainId])
     return tokenDatas && chainId
       ? tokenDatas
           .filter((x) => !!x && !TOKEN_HIDE?.[chainId]?.includes(x.address))

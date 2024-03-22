@@ -1,5 +1,6 @@
 import { ChainId } from '@pancakeswap/chains'
 import { ManipulateType } from 'dayjs'
+import { enduranceTokens } from '@pancakeswap/tokens'
 
 export const v3InfoPath = `info/v3`
 
@@ -28,6 +29,11 @@ export const POOL_HIDE: { [key: string]: string[] } = {
     '0xa7619D726F619062d2d2BCAdbb2ee1FB1952d6d7',
     '0x5FB5EB2c8Ecbf712115007990C70B79F6B256f9b',
   ],
+  [ChainId.ENDURANCE]: [
+    '0x0b3796c4BBFCb14B54bBf23E3A37085E992a6429'.toLowerCase(),
+    '0x225642Abedc4Bf6d5e9bB8eF9dc67f8C4d0828C7'.toLowerCase(),
+    '0xeac8c29642B12231240bBc22004c8182D62D1c1a'.toLowerCase(),
+  ],
 }
 
 export const TOKEN_HIDE: { [key: string]: string[] } = {
@@ -40,6 +46,7 @@ export const TOKEN_HIDE: { [key: string]: string[] } = {
     '0xdb19f2052D2B1aD46Ed98C66336A5dAADEB13005',
   ],
   [ChainId.BSC]: ['0xdb19f2052D2B1aD46Ed98C66336A5dAADEB13005', '0x57a63C32CC2aD6CE4FBE5423d548D12d0EEDdfc1'],
+  [ChainId.ENDURANCE]: [enduranceTokens.aapfp.address.toLowerCase(), enduranceTokens.aceUSD.address.toLowerCase()],
 }
 
 export const TimeWindow: {

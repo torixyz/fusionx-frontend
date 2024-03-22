@@ -61,6 +61,9 @@ const Menu = (props) => {
               >
                 Liquidity
               </NextLink>
+              <NextLink className={`menu-item ${pathname?.includes('info') ? 'active' : ''}`} href="/info/v3/endurance">
+                Info
+              </NextLink>
               <NextLink className={`menu-item ${pathname?.includes('nft') ? 'active' : ''}`} href="/nfts">
                 NFTs
               </NextLink>

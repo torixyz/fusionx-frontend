@@ -9,6 +9,8 @@ import { formatAmount } from 'utils/formatInfoNumbers'
 import { useActiveChainId } from 'hooks/useActiveChainId'
 import { CurrencyLogo } from 'views/Info/components/CurrencyLogo'
 import Percent from 'views/Info/components/Percent'
+import { Token } from '@pancakeswap/swap-sdk-core'
+import { ChainId } from '@pancakeswap/chains'
 import { v3InfoPath, TOKEN_HIDE } from '../../constants'
 import { useTopTokensData } from '../../hooks'
 import { TokenData } from '../../types'
@@ -48,7 +50,21 @@ const DataCard = ({ tokenData }: { tokenData: TokenData }) => {
         <Flex>
           <Box width="32px" height="32px">
             {/* wrapped in a box because of alignment issues between img and svg */}
-            <CurrencyLogo address={tokenData.address} size="32px" chainName={chainName} />
+            <CurrencyLogo
+              token={
+                new Token(
+                  ChainId.ENDURANCE,
+                  tokenData.address as `0x{string}`,
+                  tokenData.decimals,
+                  tokenData.symbol,
+                  tokenData.name,
+                  '',
+                )
+              }
+              address={tokenData.address}
+              size="32px"
+              chainName={chainName}
+            />
           </Box>
           <Box ml="16px">
             <Text>{tokenData.symbol}</Text>

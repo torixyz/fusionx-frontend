@@ -74,6 +74,8 @@ const DataRow = ({ poolData, index, chainPath }: { poolData: PoolData; index: nu
         <Text fontWeight={400}>
           <RowFixed>
             <DoubleCurrencyLogo
+              token0={poolData.token0}
+              token1={poolData.token1}
               address0={poolData.token0.address}
               address1={poolData.token1.address}
               chainName={chainName}
