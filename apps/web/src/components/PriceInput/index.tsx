@@ -1,4 +1,6 @@
+import BN from 'bignumber.js'
 import Image from 'next/image'
+import { useState } from 'react'
 
 import { NumericalInput } from '@pancakeswap/widgets-internal'
 import infoError from '../../../public/images/nfts2/info-error.svg'
@@ -12,7 +14,9 @@ type IPriceInput = {
   errorMsg?: string
   suffix: React.ReactNode
   disabled?: boolean
+  min?: number
   max?: number
+  decimal?: number
 }
 export default function PriceInput({
   label,
@@ -22,8 +26,15 @@ export default function PriceInput({
   errorMsg,
   suffix,
   disabled,
-  max,
+  min = 0,
+  max = 999999,
+  decimal = 18,
 }: IPriceInput) {
+  const [internalError, setInternalError] = useState('')
+  const getDecimalLength = (value: string) => {
+    const parts = value.split('.')
+    return parts.length > 1 ? parts[1].length : 0
+  }
   return (
     <Wrapper>
       <div className={`price-input__wrapper ${errorMsg ? 'price-input__wrapper--error' : ''}`}>
@@ -47,6 +58,16 @@ export default function PriceInput({
             style={{ width: '260px' }}
             pattern="^[0-9]*[.,]?[0-9]*$"
             onUserInput={(val) => {
+              const bn = new BN(val)
+              if (bn.isGreaterThan(max)) {
+                setInternalError(`The maximum value is ${max}`)
+              } else if (bn.isLessThan(min)) {
+                setInternalError(`The minimum value is ${min}`)
+              } else if (getDecimalLength(val || '') > decimal) {
+                setInternalError(`The maximum decimal is ${decimal}`)
+              } else {
+                setInternalError('')
+              }
               setAmount(val)
             }}
             max={max}
@@ -54,10 +75,10 @@ export default function PriceInput({
           />
           {suffix && <div className="price-input__input-suffix">{suffix}</div>}
         </div>
-        {errorMsg && (
+        {(errorMsg || internalError) && (
           <div className="price-input__error-box">
             <Image src={infoError} alt="error icon" className="price-input__error-icon" />
-            <div className="price-input__error-msg">{errorMsg}</div>
+            <div className="price-input__error-msg">{errorMsg || internalError}</div>
           </div>
         )}
       </div>

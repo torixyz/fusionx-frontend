@@ -83,6 +83,7 @@
     "bottleneck": "^2.19.5",
     "canvas-confetti": "^1.5.1",
     "chart.js": "^4.4.0",
+    "click-to-react-component": "^1.1.0",
     "clsx": "^1.2.1",
     "cookies-next": "^2.1.1",
     "crypto-js": "^4.2.0",

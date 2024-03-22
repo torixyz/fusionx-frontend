@@ -1,11 +1,11 @@
 import { useTranslation } from '@pancakeswap/localization'
 import { AutoColumn, Box, Button, Card, Heading, Text } from '@pancakeswap/uikit'
+import isUndefinedOrNull from '@pancakeswap/utils/isUndefinedOrNull'
 import Page from 'components/Layout/Page'
 import dayjs from 'dayjs'
 import { useActiveChainId } from 'hooks/useActiveChainId'
 import useTheme from 'hooks/useTheme'
 import { useEffect, useMemo, useState } from 'react'
-import isUndefinedOrNull from '@pancakeswap/utils/isUndefinedOrNull'
 import BarChart from './components/BarChart/alt'
 import { DarkGreyCard } from './components/Card'
 import LineChart from './components/LineChart/alt'
@@ -158,22 +158,23 @@ export default function Home() {
             topRight={
               <RowFixed style={{ marginLeft: '-40px', marginTop: '8px' }}>
                 <Button
+                  className="bg-black"
                   scale="sm"
-                  variant={volumeWindow === VolumeWindow.daily ? 'primary' : 'bubblegum'}
+                  variant={volumeWindow === VolumeWindow.daily ? 'primary' : 'subtle'}
                   onClick={() => setVolumeWindow(VolumeWindow.daily)}
                 >
                   D
                 </Button>
                 <Button
                   scale="sm"
-                  variant={volumeWindow === VolumeWindow.weekly ? 'primary' : 'bubblegum'}
+                  variant={volumeWindow === VolumeWindow.weekly ? 'primary' : 'subtle'}
                   style={{ marginLeft: '8px' }}
                   onClick={() => setVolumeWindow(VolumeWindow.weekly)}
                 >
                   W
                 </Button>
                 <Button
-                  variant={volumeWindow === VolumeWindow.monthly ? 'primary' : 'bubblegum'}
+                  variant={volumeWindow === VolumeWindow.monthly ? 'primary' : 'subtle'}
                   scale="sm"
                   style={{ marginLeft: '8px' }}
                   onClick={() => setVolumeWindow(VolumeWindow.monthly)}

@@ -24,8 +24,8 @@ export type SwapLineChartNewProps = {
 
 const getChartColors = ({ isChangePositive }: { isChangePositive: boolean }) => {
   return isChangePositive
-    ? { gradient1: "#00E7B0", gradient2: "#0C8B6C", stroke: "#31D0AA" }
-    : { gradient1: "#ED4B9E", gradient2: "#ED4B9E", stroke: "#ED4B9E " };
+    ? { gradient1: "#0ecb81", gradient2: "0ecb81", stroke: "#0ecb81" }
+    : { gradient1: "#f6465d", gradient2: "#f6465d", stroke: "#f6465d " };
 };
 
 const dateFormattingByTimewindow: Record<PairDataTimeWindowEnum, string> = {
@@ -122,7 +122,8 @@ export const SwapLineChart: React.FC<SwapLineChartNewProps> = ({
       lineWidth: 2,
       lineColor: colors.gradient1,
       topColor: colors.gradient1,
-      bottomColor: isDark ? "#3c3742" : "white",
+      bottomColor: isChangePositive ? "#0ecb811a" : "#f6465d1a",
+      // bottomColor: isDark ? "#0ecb811a" : "white",
       priceFormat: { type: "price", precision, minMove: 1 / 10 ** precision },
     });
     newSeries.applyOptions({

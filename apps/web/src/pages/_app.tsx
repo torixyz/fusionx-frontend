@@ -1,5 +1,6 @@
 import { ResetCSS, ScrollToTopButtonV2, ToastListener } from '@pancakeswap/uikit'
 import BigNumber from 'bignumber.js'
+// import { ClickToComponent } from 'click-to-react-component'
 import { SentryErrorBoundary } from 'components/ErrorBoundary'
 import GlobalCheckClaimStatus from 'components/GlobalCheckClaimStatus'
 import { PageMeta } from 'components/Layout/Page'
@@ -8,29 +9,29 @@ import { FixedSubgraphHealthIndicator } from 'components/SubgraphHealthIndicator
 import TransactionsDetailModal from 'components/TransactionDetailModal'
 import { useAccountEventListener } from 'hooks/useAccountEventListener'
 import useEagerConnectMP from 'hooks/useEagerConnect.bmp'
+import { useLoadExperimentalFeatures } from 'hooks/useExperimentalFeatureEnabled'
 import useLockedEndNotification from 'hooks/useLockedEndNotification'
 import useSentryUser from 'hooks/useSentryUser'
 import useThemeCookie from 'hooks/useThemeCookie'
 import useUserAgent from 'hooks/useUserAgent'
+import { useInitGlobalWorker } from 'hooks/useWorker'
 import { NextPage } from 'next'
 import { DefaultSeo } from 'next-seo'
 import type { AppProps } from 'next/app'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import Script from 'next/script'
 import { Fragment } from 'react'
 import { PersistGate } from 'redux-persist/integration/react'
-import { useRouter } from 'next/router'
-import { useLoadExperimentalFeatures } from 'hooks/useExperimentalFeatureEnabled'
-import { useInitGlobalWorker } from 'hooks/useWorker'
 import { persistor, useStore } from 'state'
 import { usePollBlockNumber } from 'state/block/hooks'
 import { Blocklist, Updaters } from '..'
 import { SEO } from '../../next-seo.config'
 import Providers from '../Providers'
 import Menu from '../components/Menu'
-import GlobalStyle from '../style/Global'
 import '../global.css'
+import GlobalStyle from '../style/Global'
 
 const EasterEgg = dynamic(() => import('components/EasterEgg'), { ssr: false })
 
@@ -69,6 +70,7 @@ function MyApp(props: AppProps<{ initialReduxState: any; dehydratedState: any }>
 
   return (
     <>
+      {/* <ClickToComponent /> */}
       <Head>
         <meta
           name="viewport"
