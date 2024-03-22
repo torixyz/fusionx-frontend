@@ -169,7 +169,6 @@ export default function TokenTable({
   }, [maxItems, tokenDatas])
 
   const sortedTokens = useMemo(() => {
-    console.log(tokenDatas, 'fuck tokens', chainId, TOKEN_HIDE?.[chainId])
     return tokenDatas && chainId
       ? tokenDatas
           .filter((x) => !!x && !TOKEN_HIDE?.[chainId]?.includes(x.address))

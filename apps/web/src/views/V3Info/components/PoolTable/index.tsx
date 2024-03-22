@@ -8,6 +8,8 @@ import { styled } from 'styled-components'
 import { getTokenSymbolAlias } from 'utils/getTokenAlias'
 import { DoubleCurrencyLogo } from 'views/Info/components/CurrencyLogo'
 import { Arrow, Break, ClickableColumnHeader, PageButtons, TableWrapper } from 'views/Info/components/InfoTables/shared'
+import { Token } from '@pancakeswap/swap-sdk-core'
+import { ChainId } from '@pancakeswap/chains'
 import { POOL_HIDE, v3InfoPath } from '../../constants'
 import { PoolData } from '../../types'
 import { feeTierPercent } from '../../utils'
@@ -74,8 +76,26 @@ const DataRow = ({ poolData, index, chainPath }: { poolData: PoolData; index: nu
         <Text fontWeight={400}>
           <RowFixed>
             <DoubleCurrencyLogo
-              token0={poolData.token0}
-              token1={poolData.token1}
+              token0={
+                new Token(
+                  ChainId.ENDURANCE,
+                  poolData.token0.address as `0x{string}`,
+                  poolData.token0.decimals,
+                  poolData.token0.symbol,
+                  poolData.token0.name,
+                  '',
+                )
+              }
+              token1={
+                new Token(
+                  ChainId.ENDURANCE,
+                  poolData.token1.address as `0x{string}`,
+                  poolData.token1.decimals,
+                  poolData.token1.symbol,
+                  poolData.token1.name,
+                  '',
+                )
+              }
               address0={poolData.token0.address}
               address1={poolData.token1.address}
               chainName={chainName}
