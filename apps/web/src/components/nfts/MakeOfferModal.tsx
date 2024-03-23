@@ -8,7 +8,7 @@ import PriceInput from 'components/PriceInput'
 import WrapACEModal from 'components/nfts/WrapACEModal'
 import { ASSET_CDN } from 'config/constants/endpoints'
 import { DOCKMAN_HOST, FEE_ADDRESS, FEE_BASIS_POINTS, SEAPORT_ADDRESS } from 'config/nfts'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { displayBalance } from 'utils/display'
 import { useEthersSigner } from 'utils/ethers'
 import { Address } from 'viem'
@@ -26,6 +26,7 @@ const MakeOfferModal = ({ collectionAddress, tokenId, onDismiss, refetch }: Make
   )
   const [loading, setLoading] = useState(false)
   const [amount, setAmount] = useState('')
+  const [buttonStatus, setButtonStatus] = useState(false)
   const { address } = useAccount()
   const signer = useEthersSigner()
   const { toastSuccess, toastError } = useToast()
@@ -34,6 +35,15 @@ const MakeOfferModal = ({ collectionAddress, tokenId, onDismiss, refetch }: Make
     address,
   })
 
+  useEffect(() => {
+    const bn = new BigNumber(amount)
+    const decimalLength = amount.split('.').length > 1 ? amount.split('.')[1].length : 0
+    if (bn.isGreaterThan(999999) || decimalLength > 4) {
+      setButtonStatus(true)
+    } else {
+      setButtonStatus(false)
+    }
+  }, [amount])
   const { data: allowance } = useContractRead({
     address: enduranceTokens.wace.address as Address,
     abi: erc20ABI,
@@ -137,7 +147,7 @@ const MakeOfferModal = ({ collectionAddress, tokenId, onDismiss, refetch }: Make
         decimal={4}
       />
       <Grid gridTemplateColumns="1fr 1fr" gridColumnGap="12px">
-        <Button mt="20px" onClick={onMakeOffer} isLoading={loading}>
+        <Button mt="20px" onClick={onMakeOffer} isLoading={loading} disabled={buttonStatus}>
           {loading && <Loading mr="10px" />}
           Confirm
         </Button>
