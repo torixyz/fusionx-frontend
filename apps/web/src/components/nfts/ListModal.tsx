@@ -96,6 +96,7 @@ const ListModal = ({ collectionAddress, tokenId, onDismiss, refetch }: ListModal
         errorMsg=""
         suffix={<TokenSelect />}
         max={999999}
+        decimal={4}
       />
       <Flex justifyContent="space-between" py="10px">
         <div>Collection Fee</div>

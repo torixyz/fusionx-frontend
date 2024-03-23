@@ -1,6 +1,6 @@
 import { Box, Container, Flex, Text } from '@pancakeswap/uikit'
 import { useQuery } from '@tanstack/react-query'
-import { DEFAULT_COLLECTION_BANNER, DOCKMAN_HOST } from 'config/nfts'
+import { DOCKMAN_HOST } from 'config/nfts'
 import Link from 'next/link'
 import { styled } from 'styled-components'
 
@@ -109,7 +109,7 @@ export default function Index() {
         <div>
           <span style={{ fontSize: 32, fontWeight: 900, fontFamily: 'Poppins' }}> NFT Collection List </span>
           <CollectionSwiper>
-            {collections?.map((c) => (
+            {/* {collections?.map((c) => (
               <CollectionSwiperItem
                 href={`/nfts/list/${c?.id}`}
                 style={{
@@ -120,7 +120,16 @@ export default function Index() {
               >
                 <CollectionSwiperItemMeta>{c?.collection_name}</CollectionSwiperItemMeta>
               </CollectionSwiperItem>
-            ))}
+            ))} */}
+            <CollectionSwiperItem
+              href="/nfts/list/648-0x0a2d8f259b976147c7d014d337331951ef3c1f4b"
+              style={{
+                backgroundImage: `url(/images/c1.png)`,
+                backgroundSize: '100% 100%',
+              }}
+            >
+              <CollectionSwiperItemMeta>AceArenaPFP</CollectionSwiperItemMeta>
+            </CollectionSwiperItem>
             <CollectionSwiperItem
               href="/nfts"
               style={{
