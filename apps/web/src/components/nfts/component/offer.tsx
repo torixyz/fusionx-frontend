@@ -71,7 +71,7 @@ const Item = ({ columns, offer, isOwner, refetch }: { columns: any; offer: any; 
         </AddressLink>
       </div>
 
-      {isOwner && (
+      {!isOwner && (
         <Button scale="sm" onClick={() => onAccept(offer?.order_hash)} isLoading={loading}>
           {loading && <Loading />}
           Accept
@@ -102,13 +102,16 @@ export default function Offer({ offers, nft, refetch }: { offers: any; nft: any;
         width: '120px',
       },
       tdStyle: {
-        paddingLeft: '4px',
+        paddingLeft: '8px',
       },
     },
     {
       name: 'From',
       style: {
-        width: '140px',
+        width: '160px',
+      },
+      tdStyle: {
+        paddingLeft: '4px',
       },
     },
     {

@@ -70,7 +70,6 @@ export default function PriceInput({
               }
               setAmount(val)
             }}
-            max={max}
             disabled={disabled}
           />
           {suffix && <div className="price-input__input-suffix">{suffix}</div>}

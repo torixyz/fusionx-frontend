@@ -134,6 +134,7 @@ const MakeOfferModal = ({ collectionAddress, tokenId, onDismiss, refetch }: Make
           </>
         }
         max={999999}
+        decimal={4}
       />
       <Grid gridTemplateColumns="1fr 1fr" gridColumnGap="12px">
         <Button mt="20px" onClick={onMakeOffer} isLoading={loading}>

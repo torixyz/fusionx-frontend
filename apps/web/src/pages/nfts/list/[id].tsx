@@ -88,17 +88,18 @@ const ItemsWrapper = styled.div`
 
 type ISortButton = {
   type: 'asc' | 'desc' | 'none'
-  onClick: () => void
+  onClickAsc: () => void
+  onClickDesc: () => void
 }
 
-const SortButton = ({ type, onClick }: ISortButton) => {
+const SortButton = ({ type, onClickAsc, onClickDesc }: ISortButton) => {
   const upClassName = type === 'asc' ? 'sensei__arrow--active' : ''
   const downClassName = type === 'desc' ? 'sensei__arrow--active' : ''
   return (
     <SortButtonWrapper>
-      <div className="sensei__arrow-box" onClick={onClick}>
-        <div className={`sensei__arrow sensei__arrow-up ${upClassName}`} />
-        <div className={`sensei__arrow sensei__arrow-down ${downClassName}`} />
+      <div className="sensei__arrow-box">
+        <div className={`sensei__arrow sensei__arrow-up ${upClassName}`} onClick={onClickAsc} />
+        <div className={`sensei__arrow sensei__arrow-down ${downClassName}`} onClick={onClickDesc} />
       </div>
     </SortButtonWrapper>
   )
@@ -179,14 +180,27 @@ export default function SGTList() {
   ]
 
   const [columns, setColumns] = useState(_columns)
-  const raritySort = columns?.[1]?.sortType === 'asc' ? 'rarity_increase' : 'rarity_decrease'
-  const priceSort = columns?.[2]?.sortType === 'asc' ? 'price_increase' : 'price_decrease'
+  const sortKey = columns.find((column) => {
+    return column.sortType !== 'none'
+  })
+
+  let querySortType = ''
+  switch (sortKey?.name) {
+    case 'Price':
+      querySortType = sortKey.sortType === 'asc' ? 'price_increase' : 'price_decrease'
+      break
+    case 'Rarity':
+      querySortType = sortKey.sortType === 'asc' ? 'rarity_increase' : 'rarity_decrease'
+      break
+    default:
+      break
+  }
 
   const { data, fetchNextPage } = useInfiniteQuery({
-    queryKey: [`nfts_${id}_${raritySort}_${priceSort}`],
+    queryKey: [`nfts_${id}_${querySortType}`],
     queryFn: async ({ pageParam = 0 }) => {
       const res = await fetch(
-        `${DOCKMAN_HOST}/nft?page_number=${pageParam + 1}&page_size=20&collection_id=${id}&sort_type=${raritySort}`,
+        `${DOCKMAN_HOST}/nft?page_number=${pageParam + 1}&page_size=20&collection_id=${id}&sort_type=${querySortType}`,
       ).then((r) => r.json())
 
       if (res?.statusCode === 500) {
@@ -328,23 +342,28 @@ export default function SGTList() {
                     return (
                       <div key={item.name} style={item.style} className="sensei__table-header-item">
                         {item.name}
-                        {index > 0 && index < 3 && (
+                        {['Rarity', 'Price'].includes(item.name) && (
                           <SortButton
                             type={item.sortType as 'asc' | 'desc' | 'none'}
-                            onClick={() => {
-                              const newColumns = columns.map((column, i) => {
-                                if (i === index) {
-                                  if (column.sortType === 'asc') {
-                                    return { ...column, sortType: 'desc', selected: true }
-                                  }
-                                  if (column.sortType === 'desc') {
-                                    return { ...column, sortType: 'none', selected: false }
-                                  }
-                                  return { ...column, sortType: 'asc', selected: true }
-                                }
-                                return { ...column }
+                            onClickAsc={() => {
+                              const newColumns = [...columns]
+                              newColumns.map((column) => {
+                                // eslint-disable-next-line no-param-reassign
+                                column.sortType = 'none'
+                                return column
                               })
-                              setColumns(newColumns)
+                              newColumns[index].sortType = 'asc'
+                              setColumns([...newColumns])
+                            }}
+                            onClickDesc={() => {
+                              const newColumns = [...columns]
+                              newColumns.map((column) => {
+                                // eslint-disable-next-line no-param-reassign
+                                column.sortType = 'none'
+                                return column
+                              })
+                              newColumns[index].sortType = 'desc'
+                              setColumns([...newColumns])
                             }}
                           />
                         )}

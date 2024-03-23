@@ -745,7 +745,7 @@ export default function User() {
                     </Link>
                   )
                 })}
-                {!datasetList.length ? <span className="sensei__table-no-data">No Data</span> : ''}
+                {!datasetList?.length ? <span className="sensei__table-no-data">No Data</span> : ''}
               </div>
             </div>
           </div>
@@ -828,7 +828,7 @@ export default function User() {
                     </Link>
                   )
                 })}
-                {!offerModeList.length ? <span className="sensei__table-no-data">No Data</span> : ''}
+                {!offerModeList?.length ? <span className="sensei__table-no-data">No Data</span> : ''}
               </div>
             </div>
           </div>
@@ -919,7 +919,7 @@ export default function User() {
                     </Link>
                   )
                 })}
-                {!listModeList.length ? <span className="sensei__table-no-data">No Data</span> : ''}
+                {!listModeList?.length ? <span className="sensei__table-no-data">No Data</span> : ''}
               </div>
             </div>
           </div>

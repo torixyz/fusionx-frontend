@@ -77,7 +77,7 @@ const Item = ({ list, order, refetch }: { list: any; order: any; refetch?: any }
   }
 
   return (
-    <Flex key={order?.id}>
+    <Flex key={order?.id} alignItems="center">
       <Box width="130px">
         <AutoRow gap="8px">
           {displayBalance(order.price)}
@@ -87,7 +87,7 @@ const Item = ({ list, order, refetch }: { list: any; order: any; refetch?: any }
       <Box width="120px">
         <Text>{order.quantity}</Text>
       </Box>
-      <Box width="200px">
+      <Box width="160px">
         <AddressLink href={`https://explorer-endurance.fusionist.io/address/${order.from}`}>
           {ellipseAddress(order.from)}
         </AddressLink>
