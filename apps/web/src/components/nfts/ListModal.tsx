@@ -2,10 +2,11 @@ import { Seaport } from '@opensea/seaport-js'
 import { ItemType } from '@opensea/seaport-js/lib/constants'
 import { useTranslation } from '@pancakeswap/localization'
 import { Button, Flex, InjectedModalProps, Loading, Modal, useToast } from '@pancakeswap/uikit'
+import BigNumber from 'bignumber.js'
 import PriceInput from 'components/PriceInput'
 import TokenSelect from 'components/TokenSelect'
 import { DOCKMAN_HOST, FEE_ADDRESS, FEE_BASIS_POINTS, SEAPORT_ADDRESS } from 'config/nfts'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { displayBalance } from 'utils/display'
 import { useEthersSigner } from 'utils/ethers'
 import { parseEther } from 'viem'
@@ -21,11 +22,21 @@ const ListModal = ({ collectionAddress, tokenId, onDismiss, refetch }: ListModal
   const [loading, setLoading] = useState(false)
   const { address } = useAccount()
   const [amount, setAmount] = useState('')
+  const [buttonStatus, setButtonStatus] = useState(false)
   const signer = useEthersSigner()
   const { toastSuccess, toastError } = useToast()
   const { data: balance } = useBalance({
     address,
   })
+  useEffect(() => {
+    const bn = new BigNumber(amount)
+    const decimalLength = amount.split('.').length > 1 ? amount.split('.')[1].length : 0
+    if (bn.isGreaterThan(999999) || decimalLength > 4) {
+      setButtonStatus(true)
+    } else {
+      setButtonStatus(false)
+    }
+  }, [amount])
   const onList = async () => {
     if (!signer) return
     setLoading(true)
@@ -106,7 +117,7 @@ const ListModal = ({ collectionAddress, tokenId, onDismiss, refetch }: ListModal
       {/*  <div className="sgt-adventure__modal-total-label">Total received</div> */}
       {/*  <div className="sgt-adventure__modal-total-value">0.95 ACE</div> */}
       {/* </Flex> */}
-      <Button onClick={onList} mt="20px" isLoading={loading}>
+      <Button onClick={onList} mt="20px" isLoading={loading} disabled={buttonStatus}>
         {loading && <Loading mr="10px" />}
         Confirm
       </Button>

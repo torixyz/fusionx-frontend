@@ -137,7 +137,7 @@ export default function SGTList() {
     },
     {
       name: 'Price',
-      sortType: 'none',
+      sortType: 'asc',
       style: {
         width: '150px',
         justifyContent: 'center',
