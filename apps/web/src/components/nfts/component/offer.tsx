@@ -141,7 +141,7 @@ export default function Offer({ offers, nft, refetch }: { offers: any; nft: any;
               {offers?.map((offer, index) => {
                 return <Item columns={columns} offer={offer} isOwner={isOwner} key={offer?.id} refetch={refetch} />
               })}
-              {!offers.length ? <span className="sensei__table-no-data">No Data</span> : ''}
+              {!offers?.length ? <span className="sensei__table-no-data">No Data</span> : ''}
             </Column>
           </Box>
         </div>
