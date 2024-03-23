@@ -71,7 +71,7 @@ const Item = ({ columns, offer, isOwner, refetch }: { columns: any; offer: any; 
         </AddressLink>
       </div>
 
-      {!isOwner && (
+      {isOwner && (
         <Button scale="sm" onClick={() => onAccept(offer?.order_hash)} isLoading={loading}>
           {loading && <Loading />}
           Accept
