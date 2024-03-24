@@ -19,7 +19,13 @@ import {
   Text,
 } from '@pancakeswap/uikit'
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
-import { DEFAULT_COLLECTION_AVATAR, DEFAULT_NFT_IMAGE, DOCKMAN_HOST } from 'config/nfts'
+import {
+  DEFAULT_COLLECTION_AVATAR,
+  DEFAULT_NFT_IMAGE,
+  DOCKMAN_HOST,
+  RECYCLE_ABI,
+  RECYCLE_CONTRACT_ADDRESS,
+} from 'config/nfts'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
@@ -27,6 +33,7 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import { styled } from 'styled-components'
 import { ellipseAddress } from 'utils/address'
 import { displayBalance } from 'utils/display'
+import { useBalance, useContractRead } from 'wagmi'
 import Image from '../../../components/nfts/component/image'
 import AddressLink from '../../../components/nfts/component/link'
 
@@ -223,6 +230,16 @@ export default function SGTList() {
   }, [])
   const meta = pages?.[pages?.length - 1]?.meta
 
+  const { data: recyclePoolBalance } = useBalance({
+    address: RECYCLE_CONTRACT_ADDRESS,
+  })
+  const { data: buybackAmount } = useContractRead({
+    address: RECYCLE_CONTRACT_ADDRESS,
+    abi: RECYCLE_ABI,
+    functionName: 'peekBuybackAmount',
+    watch: true,
+  })
+
   if (!nfts || !collection) {
     return (
       <Flex alignItems="center" justifyContent="center" py="40px">
@@ -289,7 +306,7 @@ export default function SGTList() {
                       Recycle Price
                     </Text>
                     <AutoRow gap="8px">
-                      <Text>{displayBalance(collection?.collection_top_bid)}</Text>
+                      <Text>{displayBalance(buybackAmount, 18, 6)}</Text>
                       <AceIcon />
                     </AutoRow>
                   </Box>
@@ -298,7 +315,7 @@ export default function SGTList() {
                       Recycle Pool
                     </Text>
                     <AutoRow gap="8px">
-                      <Text>{displayBalance(collection?.collection_top_bid)}</Text>
+                      <Text>{displayBalance(recyclePoolBalance?.value)}</Text>
                       <AceIcon />
                     </AutoRow>
                   </Box>
