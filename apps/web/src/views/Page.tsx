@@ -4,6 +4,7 @@ const Page: React.FC<
   React.PropsWithChildren<{
     removePadding?: boolean
     noMinHeight?: boolean
+    style?: any
   }>
 > = ({ children, removePadding = false, noMinHeight = false, ...props }) => {
   return (
