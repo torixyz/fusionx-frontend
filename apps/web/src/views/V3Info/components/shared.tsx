@@ -1,5 +1,5 @@
-import { styled } from 'styled-components'
 import { Flex, Link } from '@pancakeswap/uikit'
+import { styled } from 'styled-components'
 
 export const PageButtons = styled.div`
   width: 100%;
@@ -68,7 +68,6 @@ export const ChartCardsContainer = styled(Flex)`
   width: 100%;
   padding: 0;
   gap: 1em;
-
   & > * {
     width: 100%;
   }
