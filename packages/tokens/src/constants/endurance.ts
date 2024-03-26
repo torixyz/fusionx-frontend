@@ -18,4 +18,12 @@ export const enduranceTokens = {
     'AceArenaPFP',
     'https://www.fusionist.io',
   ),
+  peace: new ERC20Token(
+    ChainId.ENDURANCE,
+    '0x6A4a0C6f1F1644Cee981AC9a6d9f4Ff54AB3CD3D',
+    18,
+    'PeACE',
+    'PrimeACE',
+    'https://www.fusionist.io',
+  ),
 }

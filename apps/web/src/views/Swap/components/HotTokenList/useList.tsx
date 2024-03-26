@@ -15,7 +15,7 @@ export const useChainWhiteList = (chainId?: number) => {
     const list = listsByUrl[PANCAKE_EXTENDED]?.current
     return list ? list.tokens.map((t) => t.address.toLowerCase()) : []
   }, [listsByUrl])
-  if (chainId !== ChainId.BSC) return null
+  if (chainId !== ChainId.ENDURANCE) return null
   return whiteList
 }
 

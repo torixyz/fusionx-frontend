@@ -45,7 +45,7 @@ export const usdGasTokensByChain = {
   [ChainId.SEPOLIA]: [scrollSepoliaTokens.usdc],
   [ChainId.ARBITRUM_SEPOLIA]: [arbSepoliaTokens.usdc],
   [ChainId.BASE_SEPOLIA]: [baseSepoliaTokens.usdc],
-  [ChainId.ENDURANCE]: [enduranceTokens.wace],
+  [ChainId.ENDURANCE]: [enduranceTokens.peace],
   [ChainId.ENDURANCE_TESTNET]: [enduranceTestnetTokens.wace],
 } satisfies Record<ChainId, Token[]>
 

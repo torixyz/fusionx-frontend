@@ -86,7 +86,7 @@ export const SUGGESTED_BASES: ChainTokenList = {
   [ChainId.SEPOLIA]: [scrollSepoliaTokens.usdc, scrollSepoliaTokens.weth],
   [ChainId.ARBITRUM_SEPOLIA]: [arbSepoliaTokens.usdc, arbSepoliaTokens.weth],
   [ChainId.BASE_SEPOLIA]: [baseSepoliaTokens.usdc, baseSepoliaTokens.weth],
-  [ChainId.ENDURANCE]: [enduranceTokens.aapfp, enduranceTokens.wace],
+  [ChainId.ENDURANCE]: [enduranceTokens.peace, enduranceTokens.wace],
   [ChainId.ENDURANCE_TESTNET]: [enduranceTestnetTokens.peACE, enduranceTestnetTokens.wace],
 }
 
@@ -112,7 +112,7 @@ export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   [ChainId.SEPOLIA]: [scrollSepoliaTokens.usdc, scrollSepoliaTokens.weth],
   [ChainId.ARBITRUM_SEPOLIA]: [arbSepoliaTokens.usdc, arbSepoliaTokens.weth],
   [ChainId.BASE_SEPOLIA]: [baseSepoliaTokens.usdc, baseSepoliaTokens.weth],
-  [ChainId.ENDURANCE]: [enduranceTokens.aapfp, enduranceTokens.wace],
+  [ChainId.ENDURANCE]: [enduranceTokens.peace, enduranceTokens.wace],
   [ChainId.ENDURANCE_TESTNET]: [enduranceTestnetTokens.peACE, enduranceTestnetTokens.wace],
 }
 
@@ -142,7 +142,7 @@ export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } 
   [ChainId.BASE]: [[baseTokens.usdc, baseTokens.weth]],
   [ChainId.BASE_TESTNET]: [[baseTestnetTokens.usdc, baseTestnetTokens.weth]],
   [ChainId.SCROLL_SEPOLIA]: [[scrollSepoliaTokens.usdc, scrollSepoliaTokens.weth]],
-  [ChainId.ENDURANCE]: [[enduranceTokens.aapfp, enduranceTokens.wace]],
+  [ChainId.ENDURANCE]: [[enduranceTokens.peace, enduranceTokens.wace]],
   [ChainId.ENDURANCE_TESTNET]: [[enduranceTestnetTokens.peACE, enduranceTestnetTokens.wace]],
 }
 

@@ -135,7 +135,7 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   [ChainId.SEPOLIA]: [sepoliaTokens.usdc, sepoliaTokens.weth],
   [ChainId.ARBITRUM_SEPOLIA]: [arbSepoliaTokens.usdc, arbSepoliaTokens.weth],
   [ChainId.BASE_SEPOLIA]: [baseSepoliaTokens.usdc, baseSepoliaTokens.weth],
-  [ChainId.ENDURANCE]: [enduranceTokens.aapfp, enduranceTokens.wace],
+  [ChainId.ENDURANCE]: [enduranceTokens.peace, enduranceTokens.wace],
   [ChainId.ENDURANCE_TESTNET]: [enduranceTestnetTokens.peACE, enduranceTestnetTokens.wace],
 }
 

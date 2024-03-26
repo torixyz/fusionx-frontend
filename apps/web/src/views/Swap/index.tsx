@@ -57,7 +57,6 @@ export default function Swap() {
     isChartSupported,
     isHotTokenSupported,
   } = useContext(SwapFeaturesContext)
-  console.log(isDesktop, isChartDisplayed, isChartExpanded)
   const [isSwapHotTokenDisplay, setIsSwapHotTokenDisplay] = useSwapHotTokenDisplay()
   const { t } = useTranslation()
   const [firstTime, setFirstTime] = useState(true)

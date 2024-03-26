@@ -51,8 +51,9 @@ function ImportToken({ tokens, handleCurrencySelect }: ImportProps) {
     queryKey: ['has-risks', tokens],
 
     queryFn: async () => {
-      const result = await Promise.all(tokens.map((token) => fetchRiskToken(token.address, token.chainId)))
-      return result.some((r) => r.riskLevel >= TOKEN_RISK.MEDIUM)
+      // const result = await Promise.all(tokens.map((token) => fetchRiskToken(token.address, token.chainId)))
+      // return result.some((r) => r.riskLevel >= TOKEN_RISK.MEDIUM)
+      return false
     },
 
     enabled: Boolean(tokens),
