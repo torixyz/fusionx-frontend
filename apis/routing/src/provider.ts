@@ -4,7 +4,7 @@ import { createPublicClient, http } from 'viem'
 import { GraphQLClient } from 'graphql-request'
 import { SupportedChainId } from './constants'
 
-const requireCheck = [ENDURANCE_NODE]
+const requireCheck = [ENDURANCE_NODE, ENDURANCE_TESTNET_NODE]
 requireCheck.forEach((node) => {
   if (!node) {
     throw new Error('Missing env var')
@@ -39,6 +39,7 @@ export const viemProviders: OnChainProvider = ({ chainId }: { chainId?: ChainId 
 
 export const v3SubgraphClients: Record<SupportedChainId, GraphQLClient> = {
   [ChainId.ENDURANCE]: new GraphQLClient(V3_SUBGRAPHS[ChainId.ENDURANCE], { fetch }),
+  [ChainId.ENDURANCE_TESTNET]: new GraphQLClient(V3_SUBGRAPHS[ChainId.ENDURANCE_TESTNET], { fetch }),
 } as const
 
 export const v3SubgraphProvider: SubgraphProvider = ({ chainId = ChainId.ENDURANCE }: { chainId?: ChainId }) => {
