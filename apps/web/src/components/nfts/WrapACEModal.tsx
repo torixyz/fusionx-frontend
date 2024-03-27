@@ -9,7 +9,15 @@ import { useState } from 'react'
 import { displayBalance } from 'utils/display'
 import { useEthersSigner } from 'utils/ethers'
 import { Address, parseEther } from 'viem'
-import { useAccount, useBalance, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi'
+import {
+  useAccount,
+  useBalance,
+  useChainId,
+  useContractWrite,
+  usePrepareContractWrite,
+  useWaitForTransaction,
+} from 'wagmi'
+import { WACE } from '@pancakeswap/sdk'
 
 export interface WrapACEModalProps extends InjectedModalProps {
   collectionAddress: string
@@ -20,6 +28,7 @@ export interface WrapACEModalProps extends InjectedModalProps {
 const WrapACEModal = ({ onDismiss, collectionAddress, tokenId, refetch }: WrapACEModalProps) => {
   const [amount, setAmount] = useState('')
   const { address } = useAccount()
+  const chainId = useChainId()
   const signer = useEthersSigner()
   const { toastSuccess, toastError } = useToast()
   const [showMakeOfferModal] = useModal(
@@ -31,7 +40,7 @@ const WrapACEModal = ({ onDismiss, collectionAddress, tokenId, refetch }: WrapAC
   const { t } = useTranslation()
 
   const { config } = usePrepareContractWrite({
-    address: enduranceTokens.wace.address as Address,
+    address: WACE[chainId]?.address as Address,
     abi: [
       {
         inputs: [],

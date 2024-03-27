@@ -6,12 +6,13 @@ import { ellipseAddress } from 'utils/address'
 import { displayBalance } from 'utils/display'
 import { useEthersSigner } from 'utils/ethers'
 import { sleep } from 'utils/sleep'
-import { useAccount } from 'wagmi'
+import { useAccount, useChainId } from 'wagmi'
 import AddressLink from './link'
 import { Wrapper } from './offer.style'
 
 const Item = ({ columns, offer, isOwner, refetch }: { columns: any; offer: any; isOwner: boolean; refetch?: any }) => {
   const [loading, setLoading] = useState(false)
+  const chainId = useChainId()
   const signer = useEthersSigner()
   const { toastSuccess } = useToast()
   const onAccept = async (orderHash: string) => {
@@ -20,7 +21,7 @@ const Item = ({ columns, offer, isOwner, refetch }: { columns: any; offer: any; 
     try {
       console.log(offer)
       const seaport = new Seaport(signer, {
-        overrides: { contractAddress: SEAPORT_ADDRESS },
+        overrides: { contractAddress: SEAPORT_ADDRESS[chainId] },
       })
 
       const order = offer?.order
@@ -39,9 +40,11 @@ const Item = ({ columns, offer, isOwner, refetch }: { columns: any; offer: any; 
       //         ],
       const res = await tx.executeAllActions()
 
-      for (let i = 0; i < 20; i++) {
+      for (let i = 0; i < 60; i++) {
         // eslint-disable-next-line no-await-in-loop
-        const orderRes = await fetch(`${DOCKMAN_HOST}/orders/status?order_hash=${orderHash}`).then((r) => r.json())
+        const orderRes = await fetch(`${DOCKMAN_HOST[chainId]}/orders/status?order_hash=${orderHash}`).then((r) =>
+          r.json(),
+        )
         // eslint-disable-next-line no-await-in-loop
         await sleep(2000)
         if (orderRes?.order_status !== 'Normal') {

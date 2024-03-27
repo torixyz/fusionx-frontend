@@ -34,7 +34,7 @@ const UserMenuItems = () => {
   return (
     <>
       <NextLink href="/profile" passHref>
-        <UserMenuItem disabled={isWrongNetwork || chainId !== ChainId.ENDURANCE}>{t('Profile')}</UserMenuItem>
+        <UserMenuItem disabled={isWrongNetwork}>{t('Profile')}</UserMenuItem>
       </NextLink>
       <UserMenuDivider />
       <UserMenuItem as="button" disabled={isWrongNetwork} onClick={onPresentTransactionModal}>

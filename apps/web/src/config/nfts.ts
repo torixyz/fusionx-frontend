@@ -1,10 +1,22 @@
 import { ASSET_CDN } from 'config/constants/endpoints'
 import { Address } from 'viem'
+import { ChainId } from '@pancakeswap/chains'
 
 // export const DOCKMAN_HOST = 'http://copilot.tpddns.cn:19000'
-export const DOCKMAN_HOST = 'https://api.tesseract.world'
+export const DOCKMAN_HOST = {
+  [ChainId.ENDURANCE_TESTNET]: 'https://devnetapi.tesseract.world',
+  [ChainId.ENDURANCE]: 'https://api.tesseract.world',
+}
 
-export const SEAPORT_ADDRESS = '0xFF28baa302C29cFcbe898A10d4AD4f3CA574D02F'
+export const PEAEC_COLLECTION_ID = {
+  [ChainId.ENDURANCE]: '648-0x0a2d8f259b976147c7d014d337331951ef3c1f4b',
+  [ChainId.ENDURANCE_TESTNET]: '6480-0xbc638689c189b31cb4261566a59625c7db7a018a',
+}
+
+export const SEAPORT_ADDRESS = {
+  [ChainId.ENDURANCE]: '0xFF28baa302C29cFcbe898A10d4AD4f3CA574D02F',
+  [ChainId.ENDURANCE_TESTNET]: '0xe6A51926775C88442b8456BCfa6123BC702dc09f',
+}
 
 export const FEE_ADDRESS = '0x44fcC28ccC6C765E91dEDcEd37ddF4ff70515a7A'
 
@@ -15,7 +27,10 @@ export const DEFAULT_AVATAR = `${ASSET_CDN}/default-avatar.png`
 export const DEFAULT_COLLECTION_AVATAR = `${ASSET_CDN}/default-collection-avatar-3.png`
 export const DEFAULT_COLLECTION_BANNER = `${ASSET_CDN}/default-collection-banner.png`
 
-export const RECYCLE_CONTRACT_ADDRESS = `0x5B90d4dF140a4519Df7635c88cD05138c9e5b27f` as Address
+export const RECYCLE_CONTRACT_ADDRESS = {
+  [ChainId.ENDURANCE]: '0x5B90d4dF140a4519Df7635c88cD05138c9e5b27f',
+  [ChainId.ENDURANCE_TESTNET]: '0x64e1C67C6785ae81b9cf417fD2C0d30d20c51d12',
+}
 
 export const RECYCLE_ABI = [
   {

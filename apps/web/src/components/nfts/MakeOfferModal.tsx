@@ -12,7 +12,8 @@ import { useEffect, useState } from 'react'
 import { displayBalance } from 'utils/display'
 import { useEthersSigner } from 'utils/ethers'
 import { Address } from 'viem'
-import { erc20ABI, useAccount, useBalance, useContractRead } from 'wagmi'
+import { erc20ABI, useAccount, useBalance, useChainId, useContractRead } from 'wagmi'
+import { WACE } from '@pancakeswap/sdk'
 
 export interface MakeOfferModalProps extends InjectedModalProps {
   collectionAddress: string
@@ -21,6 +22,7 @@ export interface MakeOfferModalProps extends InjectedModalProps {
   refetch?: any
 }
 const MakeOfferModal = ({ collectionAddress, tokenId, onDismiss, refetch }: MakeOfferModalProps) => {
+  const chainId = useChainId()
   const [showWrapModal] = useModal(
     <WrapACEModal collectionAddress={collectionAddress} tokenId={tokenId} refetch={refetch} />,
   )
@@ -31,8 +33,9 @@ const MakeOfferModal = ({ collectionAddress, tokenId, onDismiss, refetch }: Make
   const signer = useEthersSigner()
   const { toastSuccess, toastError } = useToast()
   const { data: balance } = useBalance({
-    token: enduranceTokens.wace.address as Address,
+    token: WACE[chainId].address as Address,
     address,
+    chainId,
   })
 
   useEffect(() => {
@@ -45,10 +48,10 @@ const MakeOfferModal = ({ collectionAddress, tokenId, onDismiss, refetch }: Make
     }
   }, [amount])
   const { data: allowance } = useContractRead({
-    address: enduranceTokens.wace.address as Address,
+    address: WACE[chainId].address as Address,
     abi: erc20ABI,
     functionName: 'allowance',
-    args: [address as Address, SEAPORT_ADDRESS],
+    args: [address as Address, SEAPORT_ADDRESS[chainId]],
     watch: true,
     enabled: !!address,
   })
@@ -59,7 +62,7 @@ const MakeOfferModal = ({ collectionAddress, tokenId, onDismiss, refetch }: Make
     try {
       // @ts-ignore
       const seaport = new Seaport(signer, {
-        overrides: { contractAddress: SEAPORT_ADDRESS },
+        overrides: { contractAddress: SEAPORT_ADDRESS[chainId] },
       })
 
       const takerOrder = {
@@ -76,7 +79,7 @@ const MakeOfferModal = ({ collectionAddress, tokenId, onDismiss, refetch }: Make
               .multipliedBy(100)
               .multipliedBy(10 ** 16)
               .toFixed(),
-            token: enduranceTokens.wace.address,
+            token: WACE[chainId].address,
             itemType: ItemType.ERC20,
             identifier: '0',
           },
@@ -100,14 +103,14 @@ const MakeOfferModal = ({ collectionAddress, tokenId, onDismiss, refetch }: Make
       const { executeAllActions } = await seaport.createOrder(takerOrder, address)
       const order = await executeAllActions()
 
-      const res = await fetch(`${DOCKMAN_HOST}/orders`, {
+      const res = await fetch(`${DOCKMAN_HOST[chainId]}/orders`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           order,
-          chain_id: '648',
+          chain_id: chainId?.toString(),
         }),
       }).then((r) => r.json())
       if (res?.errorCode) {

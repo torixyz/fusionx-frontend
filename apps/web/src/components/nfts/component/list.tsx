@@ -6,12 +6,13 @@ import { ellipseAddress } from 'utils/address'
 import { displayBalance } from 'utils/display'
 import { useEthersSigner } from 'utils/ethers'
 import { sleep } from 'utils/sleep'
-import { useAccount } from 'wagmi'
+import { useAccount, useChainId } from 'wagmi'
 import AddressLink from './link'
 import { Wrapper } from './offer.style'
 
 const Item = ({ list, order, refetch }: { list: any; order: any; refetch?: any }) => {
   const [loading, setLoading] = useState(false)
+  const chainId = useChainId()
   const { address } = useAccount()
   const signer = useEthersSigner()
   const { toastSuccess, toastError } = useToast()
@@ -21,14 +22,16 @@ const Item = ({ list, order, refetch }: { list: any; order: any; refetch?: any }
     try {
       setLoading(true)
       const seaport = new Seaport(signer, {
-        overrides: { contractAddress: SEAPORT_ADDRESS },
+        overrides: { contractAddress: SEAPORT_ADDRESS[chainId] },
       })
 
       const tx = await seaport.cancelOrders([order.order.parameters])
       const res = await tx.transact()
       for (let i = 0; i < 30; i++) {
         // eslint-disable-next-line no-await-in-loop
-        const rr = await fetch(`${DOCKMAN_HOST}/orders/status?order_hash=${order?.order_hash}`).then((r) => r.json())
+        const rr = await fetch(`${DOCKMAN_HOST[chainId]}/orders/status?order_hash=${order?.order_hash}`).then((r) =>
+          r.json(),
+        )
         // eslint-disable-next-line no-await-in-loop
         await sleep(2000)
         if (rr?.order_status !== 'Normal') {
@@ -47,7 +50,7 @@ const Item = ({ list, order, refetch }: { list: any; order: any; refetch?: any }
     setLoading(true)
     try {
       const seaport = new Seaport(signer, {
-        overrides: { contractAddress: SEAPORT_ADDRESS },
+        overrides: { contractAddress: SEAPORT_ADDRESS[chainId] },
       })
 
       const tx = await seaport.fulfillOrder({ order: order.order })
@@ -55,7 +58,7 @@ const Item = ({ list, order, refetch }: { list: any; order: any; refetch?: any }
 
       for (let i = 0; i < 20; i++) {
         // eslint-disable-next-line no-await-in-loop
-        const rr = await fetch(`${DOCKMAN_HOST}/orders/status?order_hash=${orderHash}`).then((r) => r.json())
+        const rr = await fetch(`${DOCKMAN_HOST[chainId]}/orders/status?order_hash=${orderHash}`).then((r) => r.json())
         // eslint-disable-next-line no-await-in-loop
         await sleep(2000)
         if (rr?.order_status !== 'Normal') {

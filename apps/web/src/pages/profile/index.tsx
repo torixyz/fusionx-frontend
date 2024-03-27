@@ -9,7 +9,7 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import { ellipseAddress } from 'utils/address'
 import { displayBalance } from 'utils/display'
-import { useAccount } from 'wagmi'
+import { useAccount, useChainId } from 'wagmi'
 
 dayjs.extend(relativeTime)
 const ShowAcePrice = ({ price }: { price: any }) => {
@@ -406,11 +406,12 @@ export const Wrapper = styled.div`
 export default function User() {
   const { address } = useAccount()
   const [activeNav, setActiveNav] = useState('nft')
+  const chainId = useChainId()
 
   const { data } = useQuery({
     queryKey: ['userAssets', address],
     queryFn: () => {
-      return fetch(`${DOCKMAN_HOST}/me/nft?page_number=1&page_size=50&owner_address=${address}`, {
+      return fetch(`${DOCKMAN_HOST[chainId]}/me/nft?page_number=1&page_size=50&owner_address=${address}`, {
         method: 'GET',
       }).then((r) => r.json())
     },
@@ -421,7 +422,7 @@ export default function User() {
     queryKey: ['userOffers', address],
     queryFn: () => {
       return fetch(
-        `${DOCKMAN_HOST}/me/order?page_number=1&page_size=50&owner_address=${address}&order_market_type=Offer`,
+        `${DOCKMAN_HOST[chainId]}/me/order?page_number=1&page_size=50&owner_address=${address}&order_market_type=Offer`,
         {
           method: 'GET',
         },
@@ -434,7 +435,7 @@ export default function User() {
     queryKey: ['userList', address],
     queryFn: () => {
       return fetch(
-        `${DOCKMAN_HOST}/me/order?page_number=1&page_size=50&owner_address=${address}&order_market_type=List`,
+        `${DOCKMAN_HOST[chainId]}/me/order?page_number=1&page_size=50&owner_address=${address}&order_market_type=List`,
         {
           method: 'GET',
         },

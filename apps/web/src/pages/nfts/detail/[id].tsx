@@ -12,6 +12,7 @@ import { useRouter } from 'next/router'
 import { styled } from 'styled-components'
 import { getBlockExploreLink } from 'utils'
 import { ellipseAddress } from 'utils/address'
+import { useChainId } from 'wagmi'
 import Tag from '../../../components/Tag/tag'
 import Activity from '../../../components/nfts/component/activity'
 import Adventure from '../../../components/nfts/component/adventure'
@@ -263,11 +264,12 @@ export const Wrapper = styled.div`
 export default function SGTDetail() {
   const router = useRouter()
   const { id } = router.query
+  const chainId = useChainId()
 
   const { data: nft, refetch: refetchNft } = useQuery({
     queryKey: ['nftDetail', id],
     queryFn: () => {
-      return fetch(`${DOCKMAN_HOST}/nft/detail?nft_id=${id}`, {
+      return fetch(`${DOCKMAN_HOST[chainId]}/nft/detail?nft_id=${id}`, {
         method: 'GET',
       }).then((r) => r.json())
     },
@@ -277,7 +279,7 @@ export default function SGTDetail() {
   const { data: offers, refetch: refetchOffers } = useQuery({
     queryKey: ['nftOffers', id],
     queryFn: () => {
-      return fetch(`${DOCKMAN_HOST}/orders?chain_id=648&nft_id=${id}&order_market_type=Offer`, {
+      return fetch(`${DOCKMAN_HOST[chainId]}/orders?chain_id=${chainId}&nft_id=${id}&order_market_type=Offer`, {
         method: 'GET',
       }).then((r) => r.json())
     },
@@ -287,7 +289,7 @@ export default function SGTDetail() {
   const { data: list, refetch: refetchList } = useQuery({
     queryKey: ['nftList', id],
     queryFn: () => {
-      return fetch(`${DOCKMAN_HOST}/orders?chain_id=648&nft_id=${id}&order_market_type=List`, {
+      return fetch(`${DOCKMAN_HOST[chainId]}/orders?chain_id=${chainId}&nft_id=${id}&order_market_type=List`, {
         method: 'GET',
       }).then((r) => r.json())
     },
@@ -297,7 +299,7 @@ export default function SGTDetail() {
   const { data: activitiesD, refetch: refetchActivities } = useQuery({
     queryKey: ['nftActivities', id],
     queryFn: () => {
-      return fetch(`${DOCKMAN_HOST}/nft/activity?page_number=1&page_size=10&nft_id=${id}`, {
+      return fetch(`${DOCKMAN_HOST[chainId]}/nft/activity?page_number=1&page_size=10&nft_id=${id}`, {
         method: 'GET',
       }).then((r) => r.json())
     },

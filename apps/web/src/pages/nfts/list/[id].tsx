@@ -33,7 +33,7 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import { styled } from 'styled-components'
 import { ellipseAddress } from 'utils/address'
 import { displayBalance } from 'utils/display'
-import { useBalance, useContractRead } from 'wagmi'
+import { useBalance, useChainId, useContractRead } from 'wagmi'
 import Image from '../../../components/nfts/component/image'
 import AddressLink from '../../../components/nfts/component/link'
 
@@ -115,15 +115,15 @@ const SortButton = ({ type, onClickAsc, onClickDesc }: ISortButton) => {
 export default function SGTList() {
   const router = useRouter()
   const { id } = router.query
+  const chainId = useChainId()
 
   const { data: collection } = useQuery({
     queryKey: ['collectionDetail', id],
     queryFn: () => {
-      return fetch(`${DOCKMAN_HOST}/collection/detail?id=${id}`).then((r) => r.json())
+      return fetch(`${DOCKMAN_HOST[chainId]}/collection/detail?id=${id}`).then((r) => r.json())
     },
     enabled: !!id,
   })
-  console.log(collection)
 
   const _columns = [
     {
@@ -207,7 +207,9 @@ export default function SGTList() {
     queryKey: [`nfts_${id}_${querySortType}`],
     queryFn: async ({ pageParam = 0 }) => {
       const res = await fetch(
-        `${DOCKMAN_HOST}/nft?page_number=${pageParam + 1}&page_size=20&collection_id=${id}&sort_type=${querySortType}`,
+        `${DOCKMAN_HOST[chainId]}/nft?page_number=${
+          pageParam + 1
+        }&page_size=20&collection_id=${id}&sort_type=${querySortType}`,
       ).then((r) => r.json())
 
       if (res?.statusCode === 500) {
@@ -231,10 +233,10 @@ export default function SGTList() {
   const meta = pages?.[pages?.length - 1]?.meta
 
   const { data: recyclePoolBalance } = useBalance({
-    address: RECYCLE_CONTRACT_ADDRESS,
+    address: RECYCLE_CONTRACT_ADDRESS[chainId],
   })
   const { data: buybackAmount } = useContractRead({
-    address: RECYCLE_CONTRACT_ADDRESS,
+    address: RECYCLE_CONTRACT_ADDRESS[chainId],
     abi: RECYCLE_ABI,
     functionName: 'peekBuybackAmount',
     watch: true,

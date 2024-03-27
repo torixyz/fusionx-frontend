@@ -1,8 +1,9 @@
 import { Box, Container, Flex, Text } from '@pancakeswap/uikit'
 import { useQuery } from '@tanstack/react-query'
-import { DOCKMAN_HOST } from 'config/nfts'
+import { DOCKMAN_HOST, PEAEC_COLLECTION_ID } from 'config/nfts'
 import Link from 'next/link'
 import { styled } from 'styled-components'
+import { useChainId } from 'wagmi'
 
 const CollectionCard = styled(Flex)`
   border-radius: 8px;
@@ -62,10 +63,11 @@ const CollectionSwiperItemMeta = styled.div`
   backdrop-filter: blur(8px);
 `
 export default function Index() {
+  const chainId = useChainId()
   const { data } = useQuery({
     queryKey: ['nftCollections'],
     queryFn: () => {
-      return fetch(`${DOCKMAN_HOST}/collection?page_number=1&page_size=10&sort_type=time_decrease`, {
+      return fetch(`${DOCKMAN_HOST[chainId]}/collection?page_number=1&page_size=10&sort_type=time_decrease`, {
         method: 'GET',
       }).then((r) => r.json())
     },
@@ -122,7 +124,7 @@ export default function Index() {
               </CollectionSwiperItem>
             ))} */}
             <CollectionSwiperItem
-              href="/nfts/list/648-0x0a2d8f259b976147c7d014d337331951ef3c1f4b"
+              href={`/nfts/list/${PEAEC_COLLECTION_ID[chainId]}`}
               style={{
                 backgroundImage: `url(/images/c1.png)`,
                 backgroundSize: '100% 100%',

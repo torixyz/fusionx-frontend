@@ -10,7 +10,7 @@ import { ellipseAddress } from 'utils/address'
 import { displayBalance } from 'utils/display'
 import { useEthersSigner } from 'utils/ethers'
 import { sleep } from 'utils/sleep'
-import { useAccount } from 'wagmi'
+import { useAccount, useChainId } from 'wagmi'
 import Modal from '../../Modal2'
 import { Wrapper } from './adventure.style'
 import Image from './image'
@@ -19,6 +19,7 @@ import AddressLink from './link'
 export default function Adventure({ nft, refetch, list }: { nft: any; refetch: any; list: any }) {
   const [loading, setLoading] = useState(false)
   const signer = useEthersSigner()
+  const chainId = useChainId()
   const { toastSuccess, toastError } = useToast()
   const [showMakeOfferModal] = useModal(
     <MakeOfferModal collectionAddress={nft?.collection_contract_address} tokenId={nft?.token_id} refetch={refetch} />,
@@ -89,7 +90,7 @@ export default function Adventure({ nft, refetch, list }: { nft: any; refetch: a
     setLoading(true)
     try {
       const seaport = new Seaport(signer, {
-        overrides: { contractAddress: SEAPORT_ADDRESS },
+        overrides: { contractAddress: SEAPORT_ADDRESS[chainId] },
       })
 
       const tx = await seaport.fulfillOrder({ order: topList.order })
@@ -97,7 +98,9 @@ export default function Adventure({ nft, refetch, list }: { nft: any; refetch: a
 
       for (let i = 0; i < 20; i++) {
         // eslint-disable-next-line no-await-in-loop
-        const rr = await fetch(`${DOCKMAN_HOST}/orders/status?order_hash=${topList?.order_hash}`).then((r) => r.json())
+        const rr = await fetch(`${DOCKMAN_HOST[chainId]}/orders/status?order_hash=${topList?.order_hash}`).then((r) =>
+          r.json(),
+        )
         // eslint-disable-next-line no-await-in-loop
         await sleep(2000)
         if (rr?.order_status !== 'Normal') {

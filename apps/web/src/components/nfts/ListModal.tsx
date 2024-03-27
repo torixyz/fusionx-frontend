@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react'
 import { displayBalance } from 'utils/display'
 import { useEthersSigner } from 'utils/ethers'
 import { parseEther } from 'viem'
-import { useAccount, useBalance } from 'wagmi'
+import { useAccount, useBalance, useChainId } from 'wagmi'
 
 export interface ListModalProps extends InjectedModalProps {
   collectionAddress: string
@@ -21,6 +21,7 @@ export interface ListModalProps extends InjectedModalProps {
 const ListModal = ({ collectionAddress, tokenId, onDismiss, refetch }: ListModalProps) => {
   const [loading, setLoading] = useState(false)
   const { address } = useAccount()
+  const chainId = useChainId()
   const [amount, setAmount] = useState('')
   const [buttonStatus, setButtonStatus] = useState(false)
   const signer = useEthersSigner()
@@ -44,7 +45,7 @@ const ListModal = ({ collectionAddress, tokenId, onDismiss, refetch }: ListModal
     try {
       // @ts-ignore
       const seaport = new Seaport(signer, {
-        overrides: { contractAddress: SEAPORT_ADDRESS },
+        overrides: { contractAddress: SEAPORT_ADDRESS[chainId] },
       })
 
       const makerOrder = {
@@ -71,14 +72,14 @@ const ListModal = ({ collectionAddress, tokenId, onDismiss, refetch }: ListModal
       const { executeAllActions } = await seaport.createOrder(makerOrder, address)
       const order = await executeAllActions()
 
-      const res: any = await fetch(`${DOCKMAN_HOST}/orders`, {
+      const res: any = await fetch(`${DOCKMAN_HOST[chainId]}/orders`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           order,
-          chain_id: '648',
+          chain_id: chainId?.toString(),
         }),
       }).then((r) => r.json())
       if (res?.errorCode) {
