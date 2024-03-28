@@ -1,6 +1,6 @@
 import { AutoRow, Button, Flex, InjectedModalProps, Loading, Modal, ModalBody, useToast } from '@pancakeswap/uikit'
 import { useTranslation } from '@pancakeswap/localization'
-import { useAccount, useBalance } from 'wagmi'
+import { useAccount, useBalance, useChainId } from 'wagmi'
 import PriceInput from 'components/PriceInput'
 import TokenSelect from 'components/TokenSelect'
 import { useEthersSigner } from 'utils/ethers'
@@ -19,6 +19,7 @@ const CancelOrderModal = ({ onDismiss, refetch }: ListModalProps) => {
   const [loading, setLoading] = useState(false)
   const { address } = useAccount()
   const [amount, setAmount] = useState('')
+  const chainId = useChainId()
   const signer = useEthersSigner()
   const { toastSuccess, toastError } = useToast()
   const { data: balance } = useBalance({
@@ -31,7 +32,7 @@ const CancelOrderModal = ({ onDismiss, refetch }: ListModalProps) => {
     try {
       // @ts-ignore
       const seaport = new Seaport(signer, {
-        overrides: { contractAddress: SEAPORT_ADDRESS },
+        overrides: { contractAddress: SEAPORT_ADDRESS[chainId] },
       })
 
       onDismiss?.()
