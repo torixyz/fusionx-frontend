@@ -1,4 +1,4 @@
-export const CORS_ALLOW = [/\.tesseract\.com$/, /\.workers.dev$/, /^http:\/\/localhost(:\d+)?$/]
+export const CORS_ALLOW = [/\.tesseract\.world$/, /\.workers.dev$/, /^http:\/\/localhost(:\d+)?$/]
 
 function isString(s: any): s is string {
   return typeof s === 'string' || s instanceof String
