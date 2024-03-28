@@ -6,6 +6,7 @@ import { Address } from 'viem'
 import {
   erc721ABI,
   useAccount,
+  useChainId,
   useContractRead,
   useContractWrite,
   usePrepareContractWrite,
@@ -20,8 +21,9 @@ export interface ListModalProps extends InjectedModalProps {
 const ConfirmRecycleModal = ({ contract, tokenId, onDismiss, refetch }: ListModalProps) => {
   const { toastSuccess } = useToast()
   const { address } = useAccount()
+  const chainId = useChainId()
   const { data: buybackAmount } = useContractRead({
-    address: RECYCLE_CONTRACT_ADDRESS,
+    address: RECYCLE_CONTRACT_ADDRESS[chainId] as Address,
     abi: RECYCLE_ABI,
     functionName: 'peekBuybackAmount',
     watch: true,
@@ -31,12 +33,12 @@ const ConfirmRecycleModal = ({ contract, tokenId, onDismiss, refetch }: ListModa
     address: contract,
     abi: erc721ABI,
     functionName: 'isApprovedForAll',
-    args: [address as Address, RECYCLE_CONTRACT_ADDRESS],
+    args: [address as Address, RECYCLE_CONTRACT_ADDRESS[chainId] as Address],
     watch: true,
   })
 
   const { config } = usePrepareContractWrite({
-    address: RECYCLE_CONTRACT_ADDRESS,
+    address: RECYCLE_CONTRACT_ADDRESS[chainId] as Address,
     abi: RECYCLE_ABI,
     functionName: 'buyback',
     args: [tokenId],
@@ -50,7 +52,7 @@ const ConfirmRecycleModal = ({ contract, tokenId, onDismiss, refetch }: ListModa
     address: contract,
     abi: erc721ABI,
     functionName: 'setApprovalForAll',
-    args: [RECYCLE_CONTRACT_ADDRESS, true],
+    args: [RECYCLE_CONTRACT_ADDRESS[chainId] as Address, true],
   })
 
   const { write: approve, data: approveTx, isLoading: isApprovePreLoading } = useContractWrite(approveConfig)
