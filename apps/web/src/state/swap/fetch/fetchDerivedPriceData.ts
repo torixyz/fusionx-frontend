@@ -68,7 +68,7 @@ const SWAP_INFO_BY_CHAIN = {
   [ChainId.ARBITRUM_SEPOLIA]: {},
   [ChainId.BASE_SEPOLIA]: {},
   [ChainId.ENDURANCE]: { v3: V3_SUBGRAPH_URLS[ChainId.ENDURANCE] },
-  [ChainId.ENDURANCE_TESTNET]: { v3: V3_SUBGRAPH_URLS[ChainId.ENDURANCE] },
+  [ChainId.ENDURANCE_TESTNET]: { v3: V3_SUBGRAPH_URLS[ChainId.ENDURANCE_TESTNET] },
 } satisfies Record<ChainId, Partial<ProtocolEndpoint>>
 
 export const getTokenBestTvlProtocol = async (tokenAddress: string, chainId: ChainId): Promise<Protocol | null> => {

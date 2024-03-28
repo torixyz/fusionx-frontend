@@ -344,6 +344,8 @@ export const useChainNameByQuery = (): MultiChainName => {
         return 'OPBNB'
       case 'endurance':
         return 'ENDURANCE'
+      case 'endurance-testnet':
+        return 'ENDURANCE_TESTNET'
       default:
         return 'ENDURANCE'
     }
