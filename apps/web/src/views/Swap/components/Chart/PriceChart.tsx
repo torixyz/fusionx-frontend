@@ -1,7 +1,8 @@
-import { ExpandIcon, Flex, IconButton, ShrinkIcon, SyncAltIcon, Text } from '@pancakeswap/uikit'
+import { Button, ExpandIcon, Flex, IconButton, ShrinkIcon, SyncAltIcon, Text } from '@pancakeswap/uikit'
 import { CurrencyLogo, DoubleCurrencyLogo } from 'components/Logo'
+import { useState } from 'react'
 import BasicChart from './BasicChart'
-import { StyledPriceChart } from './styles'
+import { StyledIframe, StyledPriceChart } from './styles'
 
 const PriceChart = ({
   inputCurrency,
@@ -17,6 +18,7 @@ const PriceChart = ({
   currentSwapPrice,
 }) => {
   const toggleExpanded = () => setIsChartExpanded((currentIsExpanded) => !currentIsExpanded)
+  const [isTokenPrice, setIsTokenPrice] = useState(false)
 
   return (
     <StyledPriceChart
@@ -25,6 +27,7 @@ const PriceChart = ({
       $isDark={isDark}
       $isExpanded={isChartExpanded}
       $isFullWidthContainer={isFullWidthContainer}
+      marginTop={isTokenPrice ? '0px' : ''}
     >
       <Flex justifyContent="space-between" px="24px">
         <Flex alignItems="center">
@@ -50,15 +53,33 @@ const PriceChart = ({
           </Flex>
         )}
       </Flex>
-      <BasicChart
-        token0Address={token0Address}
-        token1Address={token1Address}
-        isChartExpanded={isChartExpanded}
-        inputCurrency={inputCurrency}
-        outputCurrency={outputCurrency}
-        isMobile={isMobile}
-        currentSwapPrice={currentSwapPrice}
-      />
+      {isTokenPrice ? (
+        <Flex justifyContent="space-between" padding="12px" marginTop="-8px">
+          <StyledIframe src="https://peace-price.archivenode.club/" width="100%" height="440px" title="price" />
+        </Flex>
+      ) : (
+        <BasicChart
+          token0Address={token0Address}
+          token1Address={token1Address}
+          isChartExpanded={isChartExpanded}
+          inputCurrency={inputCurrency}
+          outputCurrency={outputCurrency}
+          isMobile={isMobile}
+          currentSwapPrice={currentSwapPrice}
+        />
+      )}
+      <Flex px="24px" marginTop={isTokenPrice ? '4px' : '70px'}>
+        <Button
+          onClick={() => {
+            setIsTokenPrice(!isTokenPrice)
+          }}
+          scale="sm"
+          style={{ borderRadius: 4 }}
+        >
+          {isTokenPrice ? 'Hide Token Price' : 'Token Price'}
+          <img src="/images/token-price-icon.png" alt="" width={13} height={16} style={{ marginLeft: 4 }} />
+        </Button>
+      </Flex>
     </StyledPriceChart>
   )
 }

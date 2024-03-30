@@ -16,10 +16,16 @@ export const StyledPriceChart = styled(Box)<{
     border: ${({ theme }) => `1px solid ${theme.colors.cardBorder}`};
     border-radius: ${({ $isExpanded }) => ($isExpanded ? '0' : '16px')};
     width: ${({ $isExpanded, $isFullWidthContainer }) => ($isFullWidthContainer || $isExpanded ? '100%' : '50%')};
-    height: ${({ $isExpanded }) => ($isExpanded ? '100%' : '516px')};
+    height: ${({ $isExpanded }) => ($isExpanded ? '100%' : '564px')};
   }
 `
 
 StyledPriceChart.defaultProps = {
   height: '70%',
 }
+
+// eslint-disable-next-line no-restricted-globals
+export const StyledIframe = styled('iframe')<any>`
+  border: none;
+  border-radius: 8px;
+`
