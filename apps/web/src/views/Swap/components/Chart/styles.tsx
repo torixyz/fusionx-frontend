@@ -23,3 +23,9 @@ export const StyledPriceChart = styled(Box)<{
 StyledPriceChart.defaultProps = {
   height: '70%',
 }
+
+// eslint-disable-next-line no-restricted-globals
+export const StyledIframe = styled('iframe')<any>`
+  border: none;
+  border-radius: 16px 16px 0px 0px;
+`

@@ -68,7 +68,6 @@ export default function Swap() {
   const [leftLabel, setLeftLabel] = useState<string | undefined>()
   const [rightLabel, setRightLabel] = useState<string | undefined>()
   const { theme } = useTheme()
-
   const now = dayjs()
   const [volumeWindow, setVolumeWindow] = useState(VolumeWindow.daily)
   const weeklyVolumeData = useTransformedVolumeData(chartData, 'week')
