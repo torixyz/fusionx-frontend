@@ -2,6 +2,14 @@ import { ChainId, ERC20Token, WACE } from '@pancakeswap/sdk'
 
 export const enduranceTokens = {
   wace: WACE[ChainId.ENDURANCE],
+  ttt: new ERC20Token(
+    ChainId.ENDURANCE,
+    '0x273113E7b0d8a0978EC8f695E0bB2C8c2dD7E1F4',
+    18,
+    'TTT',
+    'TTT',
+    'https://www.fusionist.io',
+  ),
   aceUSD: new ERC20Token(
     ChainId.ENDURANCE,
     '0x853e38D0B35D2df54d3d91c210b7BD7749d614E8',

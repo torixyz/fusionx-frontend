@@ -30,6 +30,7 @@ export const POOL_HIDE: { [key: string]: string[] } = {
     '0x5FB5EB2c8Ecbf712115007990C70B79F6B256f9b',
   ],
   [ChainId.ENDURANCE]: [
+    '0x0Ca35880a4d3cB48138606965a872aA11d9ce7ff',
     '0x0b3796c4BBFCb14B54bBf23E3A37085E992a6429'.toLowerCase(),
     '0x225642Abedc4Bf6d5e9bB8eF9dc67f8C4d0828C7'.toLowerCase(),
     '0xeac8c29642B12231240bBc22004c8182D62D1c1a'.toLowerCase(),
