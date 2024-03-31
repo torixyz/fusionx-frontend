@@ -1,6 +1,6 @@
 import { Box, Container, Flex, Text } from '@pancakeswap/uikit'
 import { useQuery } from '@tanstack/react-query'
-import { DOCKMAN_HOST, PEAEC_COLLECTION_ID } from 'config/nfts'
+import { DEFAULT_COLLECTION_BANNER, DOCKMAN_HOST, PEAEC_COLLECTION_ID } from 'config/nfts'
 import Link from 'next/link'
 import { styled } from 'styled-components'
 import { useChainId } from 'wagmi'
@@ -111,7 +111,7 @@ export default function Index() {
         <div>
           <span style={{ fontSize: 32, fontWeight: 900, fontFamily: 'Poppins' }}> NFT Collection List </span>
           <CollectionSwiper>
-            {/* {collections?.map((c) => (
+            {collections?.map((c) => (
               <CollectionSwiperItem
                 href={`/nfts/list/${c?.id}`}
                 style={{
@@ -122,16 +122,16 @@ export default function Index() {
               >
                 <CollectionSwiperItemMeta>{c?.collection_name}</CollectionSwiperItemMeta>
               </CollectionSwiperItem>
-            ))} */}
-            <CollectionSwiperItem
-              href={`/nfts/list/${PEAEC_COLLECTION_ID[chainId]}`}
-              style={{
-                backgroundImage: `url(/images/c1.png)`,
-                backgroundSize: '100% 100%',
-              }}
-            >
-              <CollectionSwiperItemMeta>AceArenaPFP</CollectionSwiperItemMeta>
-            </CollectionSwiperItem>
+            ))}
+            {/* <CollectionSwiperItem */}
+            {/*  href={`/nfts/list/${PEAEC_COLLECTION_ID[chainId]}`} */}
+            {/*  style={{ */}
+            {/*    backgroundImage: `url(/images/c1.png)`, */}
+            {/*    backgroundSize: '100% 100%', */}
+            {/*  }} */}
+            {/* > */}
+            {/*  <CollectionSwiperItemMeta>AceArenaPFP</CollectionSwiperItemMeta> */}
+            {/* </CollectionSwiperItem> */}
             <CollectionSwiperItem
               href="/nfts"
               style={{

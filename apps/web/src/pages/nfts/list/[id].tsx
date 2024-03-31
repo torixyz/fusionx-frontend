@@ -124,6 +124,7 @@ export default function SGTList() {
     },
     enabled: !!id,
   })
+  console.log(collection)
 
   const _columns = [
     {
