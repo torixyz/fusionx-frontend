@@ -1,7 +1,7 @@
 import { ChainId } from '@pancakeswap/chains'
 import { Currency, CurrencyAmount, Price, TradeType } from '@pancakeswap/sdk'
 import { SmartRouterTrade } from '@pancakeswap/smart-router/evm'
-import { CAKE, STABLE_COIN } from '@pancakeswap/tokens'
+import { CAKE, enduranceTokens, STABLE_COIN } from '@pancakeswap/tokens'
 import { getFullDecimalMultiplier } from '@pancakeswap/utils/getFullDecimalMultiplier'
 import { useCakePrice } from 'hooks/useCakePrice'
 import { useMemo } from 'react'
@@ -30,7 +30,7 @@ export function useStablecoinPrice(
   const { enabled, hideIfPriceImpactTooHigh } = { ...DEFAULT_CONFIG, ...config }
 
   const cakePrice = useCakePrice()
-  const stableCoin = chainId && chainId in ChainId ? STABLE_COIN[chainId as ChainId] : undefined
+  const stableCoin = chainId && chainId in ChainId ? enduranceTokens.aceUSD : undefined
   const isCake = chainId && currency && CAKE[chainId] && currency.wrapped.equals(CAKE[chainId])
 
   const isStableCoin = currency && stableCoin && currency.wrapped.equals(stableCoin)
@@ -91,13 +91,13 @@ export function useStablecoinPrice(
       const { inputAmount, outputAmount } = trade as unknown as SmartRouterTrade<TradeType>
 
       // if price impact is too high, don't show price
-      if (hideIfPriceImpactTooHigh) {
-        const { priceImpactWithoutFee } = computeTradePriceBreakdown(trade as unknown as SmartRouterTrade<TradeType>)
-
-        if (!priceImpactWithoutFee || warningSeverity(priceImpactWithoutFee) > 2) {
-          return undefined
-        }
-      }
+      // if (hideIfPriceImpactTooHigh) {
+      //   const { priceImpactWithoutFee } = computeTradePriceBreakdown(trade as unknown as SmartRouterTrade<TradeType>)
+      //
+      //   if (!priceImpactWithoutFee || warningSeverity(priceImpactWithoutFee) > 2) {
+      //     return undefined
+      //   }
+      // }
 
       return new Price(currency, stableCoin, inputAmount.quotient, outputAmount.quotient)
     }

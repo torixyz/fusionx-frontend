@@ -211,7 +211,6 @@ export abstract class SwapRouter {
             amountOutMinimum: performAggregatedSlippageCheck ? 0n : amountOut,
             sqrtPriceLimitX96: 0n,
           }
-          console.log('encodeV3', exactInputSingleParams)
 
           calldatas.push(
             encodeFunctionData({
