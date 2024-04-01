@@ -18,7 +18,7 @@ const PriceChart = ({
   currentSwapPrice,
 }) => {
   const toggleExpanded = () => setIsChartExpanded((currentIsExpanded) => !currentIsExpanded)
-  const [isTokenPrice, setIsTokenPrice] = useState(false)
+  const [isTokenPrice, setIsTokenPrice] = useState(true)
 
   return (
     <StyledPriceChart
