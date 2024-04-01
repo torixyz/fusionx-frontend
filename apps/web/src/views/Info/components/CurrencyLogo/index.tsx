@@ -7,6 +7,7 @@ import { safeGetAddress } from 'utils'
 import { Address } from 'viem'
 import { ASSET_CDN } from 'config/constants/endpoints'
 import { ChainId } from '@pancakeswap/chains'
+import { PoolData } from 'views/V3Info/types'
 import getTokenLogoURL from '../../../../utils/getTokenLogoURL'
 
 const StyledLogo = styled(TokenLogo)<{ size: string }>`
@@ -21,7 +22,7 @@ const StyledLogo = styled(TokenLogo)<{ size: string }>`
 export const CurrencyLogo: React.FC<
   React.PropsWithChildren<{
     address?: string
-    token?: Token
+    token?: any
     size?: string
     chainName?: MultiChainName
   }>
@@ -47,8 +48,8 @@ interface DoubleCurrencyLogoProps {
   address1?: string
   size?: number
   chainName?: MultiChainName
-  token0?: Token
-  token1?: Token
+  token0?: any
+  token1?: any
 }
 
 export const DoubleCurrencyLogo: React.FC<React.PropsWithChildren<DoubleCurrencyLogoProps>> = ({

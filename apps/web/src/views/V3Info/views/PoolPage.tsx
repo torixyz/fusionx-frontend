@@ -184,6 +184,8 @@ const PoolPage: React.FC<{ address: string }> = ({ address }) => {
           <Flex flexDirection="column">
             <Flex alignItems="center" mb={['8px', null]}>
               <DoubleCurrencyLogo
+                token0={poolData.token0}
+                token1={poolData.token1}
                 address0={poolData.token0.address}
                 address1={poolData.token1.address}
                 size={32}
@@ -202,7 +204,12 @@ const PoolPage: React.FC<{ address: string }> = ({ address }) => {
                   to={`/${v3InfoPath}${chainPath}/tokens/${poolData.token0.address}${infoTypeParam}`}
                 >
                   <TokenButton>
-                    <CurrencyLogo address={poolData.token0.address} size="24px" chainName={chainName} />
+                    <CurrencyLogo
+                      token={poolData.token0}
+                      address={poolData.token0.address}
+                      size="24px"
+                      chainName={chainName}
+                    />
                     <Text fontSize="16px" ml="4px" style={{ whiteSpace: 'nowrap' }} width="fit-content">
                       {`1 ${symbol0} =  ${formatAmount(poolData.token1Price, {
                         notation: 'standard',
@@ -216,7 +223,12 @@ const PoolPage: React.FC<{ address: string }> = ({ address }) => {
                   to={`/${v3InfoPath}${chainPath}/tokens/${poolData.token1.address}${infoTypeParam}`}
                 >
                   <TokenButton ml={[null, null, '10px']}>
-                    <CurrencyLogo address={poolData.token1.address} size="24px" chainName={chainName} />
+                    <CurrencyLogo
+                      token={poolData.token1}
+                      address={poolData.token1.address}
+                      size="24px"
+                      chainName={chainName}
+                    />
                     <Text fontSize="16px" ml="4px" style={{ whiteSpace: 'nowrap' }} width="fit-content">
                       {`1 ${symbol1} =  ${formatAmount(poolData.token0Price, {
                         notation: 'standard',
@@ -255,7 +267,12 @@ const PoolPage: React.FC<{ address: string }> = ({ address }) => {
                     <Text>{t('Total Tokens Locked')}</Text>
                     <RowBetween>
                       <RowFixed>
-                        <CurrencyLogo address={poolData.token0.address} size="20px" chainName={chainName} />
+                        <CurrencyLogo
+                          token={poolData.token0}
+                          address={poolData.token0.address}
+                          size="20px"
+                          chainName={chainName}
+                        />
                         <Text fontSize="14px" ml="8px">
                           {symbol0}
                         </Text>
@@ -268,7 +285,12 @@ const PoolPage: React.FC<{ address: string }> = ({ address }) => {
                     </RowBetween>
                     <RowBetween>
                       <RowFixed>
-                        <CurrencyLogo address={poolData.token1.address} size="20px" chainName={chainName} />
+                        <CurrencyLogo
+                          token={poolData.token1}
+                          address={poolData.token1.address}
+                          size="20px"
+                          chainName={chainName}
+                        />
                         <Text fontSize="14px" ml="8px">
                           {symbol1}
                         </Text>
