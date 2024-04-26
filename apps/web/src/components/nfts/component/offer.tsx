@@ -14,7 +14,7 @@ const Item = ({ columns, offer, isOwner, refetch }: { columns: any; offer: any; 
   const [loading, setLoading] = useState(false)
   const chainId = useChainId()
   const signer = useEthersSigner()
-  const { toastSuccess } = useToast()
+  const { toastSuccess, toastError } = useToast()
   const onAccept = async (orderHash: string) => {
     if (!signer) return
     setLoading(true)
@@ -55,6 +55,10 @@ const Item = ({ columns, offer, isOwner, refetch }: { columns: any; offer: any; 
       refetch?.()
     } catch (e: any) {
       console.error(e.toString())
+      const msg = e.toString()
+      if (msg.includes('The offerer does not have the amount')) {
+        toastError('The offerer does not have the amount needed to fulfill.')
+      }
     }
 
     setLoading(false)

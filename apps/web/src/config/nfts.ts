@@ -1,5 +1,4 @@
 import { ASSET_CDN } from 'config/constants/endpoints'
-import { Address } from 'viem'
 import { ChainId } from '@pancakeswap/chains'
 
 // export const DOCKMAN_HOST = 'http://copilot.tpddns.cn:19000'
@@ -20,9 +19,7 @@ export const SEAPORT_ADDRESS = {
 }
 
 export const FEE_ADDRESS = '0xB4aa77f87218739245F7493f126cf52A298224F9'
-
 export const FEE_BASIS_POINTS = 500
-
 export const DEFAULT_NFT_IMAGE = `${ASSET_CDN}/default-nft.png`
 export const DEFAULT_AVATAR = `${ASSET_CDN}/default-avatar.png`
 export const DEFAULT_COLLECTION_AVATAR = `${ASSET_CDN}/default-collection-avatar-3.png`
